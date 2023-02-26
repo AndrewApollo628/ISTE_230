@@ -1,0 +1,139 @@
+mysql> source C:\Users\Andrew Apollo\ISTE230_Intro_To_Databasing\HW\HW03\Apollo_hw3p1.sql
++-----------------+
+| headOfState     |
++-----------------+
+| Donald J. Trump |
++-----------------+
+1 row in set (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
++---------------------+
+| headOfState         |
++---------------------+
+| Joseph R. Biden Jr. |
++---------------------+
+1 row in set (0.00 sec)
+
++----------------------------------------------+
+| name                                         |
++----------------------------------------------+
+| Aruba                                        |
+| Anguilla                                     |
+| Netherlands Antilles                         |
+| American Samoa                               |
+| Antarctica                                   |
+| French Southern territories                  |
+| Bermuda                                      |
+| Bouvet Island                                |
+| Cocos (Keeling) Islands                      |
+| Cook Islands                                 |
+| Christmas Island                             |
+| Cayman Islands                               |
+| Western Sahara                               |
+| Falkland Islands                             |
+| Faroe Islands                                |
+| Gibraltar                                    |
+| Guadeloupe                                   |
+| Greenland                                    |
+| French Guiana                                |
+| Guam                                         |
+| Hong Kong                                    |
+| Heard Island and McDonald Islands            |
+| British Indian Ocean Territory               |
+| Macao                                        |
+| Northern Mariana Islands                     |
+| Montserrat                                   |
+| Martinique                                   |
+| Mayotte                                      |
+| New Caledonia                                |
+| Norfolk Island                               |
+| Niue                                         |
+| Pitcairn                                     |
+| Puerto Rico                                  |
+| Palestine                                    |
+| French Polynesia                             |
+| RÈunion                                     |
+| South Georgia and the South Sandwich Islands |
+| Saint Helena                                 |
+| Svalbard and Jan Mayen                       |
+| Saint Pierre and Miquelon                    |
+| Turks and Caicos Islands                     |
+| Tokelau                                      |
+| East Timor                                   |
+| United States Minor Outlying Islands         |
+| Virgin Islands, British                      |
+| Virgin Islands, U.S.                         |
+| Wallis and Futuna                            |
++----------------------------------------------+
+47 rows in set (0.00 sec)
+
++-------+-----------+
+| name  | continent |
++-------+-----------+
+| China | Asia      |
++-------+-----------+
+1 row in set (0.00 sec)
+
++----------------------------------+
+| name                             |
++----------------------------------+
+| Aruba                            |
+| Anguilla                         |
+| Netherlands Antilles             |
+| Argentina                        |
+| Antigua and Barbuda              |
+| Bahamas                          |
+| Belize                           |
+| Bermuda                          |
+| Bolivia                          |
+| Brazil                           |
+| Barbados                         |
+| Canada                           |
+| Chile                            |
+| Colombia                         |
+| Costa Rica                       |
+| Cuba                             |
+| Cayman Islands                   |
+| Dominica                         |
+| Dominican Republic               |
+| Ecuador                          |
+| Falkland Islands                 |
+| Guadeloupe                       |
+| Grenada                          |
+| Greenland                        |
+| Guatemala                        |
+| French Guiana                    |
+| Guyana                           |
+| Honduras                         |
+| Haiti                            |
+| Jamaica                          |
+| Saint Kitts and Nevis            |
+| Saint Lucia                      |
+| Mexico                           |
+| Montserrat                       |
+| Martinique                       |
+| Nicaragua                        |
+| Panama                           |
+| Peru                             |
+| Puerto Rico                      |
+| Paraguay                         |
+| El Salvador                      |
+| Saint Pierre and Miquelon        |
+| Suriname                         |
+| Turks and Caicos Islands         |
+| Trinidad and Tobago              |
+| Uruguay                          |
+| United States                    |
+| Saint Vincent and the Grenadines |
+| Venezuela                        |
+| Virgin Islands, British          |
+| Virgin Islands, U.S.             |
++----------------------------------+
+51 rows in set (0.00 sec)
+
+mysql> no tee
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'no tee' at line 1
+mysql> notee
