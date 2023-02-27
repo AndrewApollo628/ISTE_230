@@ -1,0 +1,220 @@
+mysql> -- Question #1
+Server version: 8.0.32 MySQL Community Server - GPL
+
+mysql> -- Question #2
+mysql> SHOW DATABASES;
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| lawncare           |
+| myfirstdb          |
+| mysql              |
+| performance_schema |
+| studentdb          |
+| sys                |
+| titanic            |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> -- Question #3 
+mysql> SELECT current_date;
+--------------
+SELECT current_date
+--------------
+
++--------------+
+| current_date |
++--------------+
+| 2023-01-25   |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #4 
+mysql> SELECT current_time;
+--------------
+SELECT current_time
+--------------
+
++--------------+
+| current_time |
++--------------+
+| 09:55:32     |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #5 
+mysql> SELECT current_timestamp;
+--------------
+SELECT current_timestamp
+--------------
+
++---------------------+
+| current_timestamp   |
++---------------------+
+| 2023-01-25 09:55:50 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #6 
+mysql> SELECT current_user;
+--------------
+SELECT current_user
+--------------
+
++----------------+
+| current_user   |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #7 
+mysql> SELECT now();
+--------------
+SELECT now()
+--------------
+
++---------------------+
+| now()               |
++---------------------+
+| 2023-01-25 09:56:28 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #8 
+mysql> SELECT pi();
+--------------
+SELECT pi()
+--------------
+
++----------+
+| pi()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #9 
+mysql> SELECT user();
+--------------
+SELECT user()
+--------------
+
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #10 
+mysql> SELECT version();
+--------------
+SELECT version()
+--------------
+
++-----------+
+| version() |
++-----------+
+| 8.0.32    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #11 
+mysql> SELECT curdate();
+--------------
+SELECT curdate()
+--------------
+
++------------+
+| curdate()  |
++------------+
+| 2023-01-25 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #12 
+mysql> SELECT DATE_ADD(CURDATE(), INTERVAL 1 DAY);
+--------------
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 DAY)
+--------------
+
++-------------------------------------+
+| DATE_ADD(CURDATE(), INTERVAL 1 DAY) |
++-------------------------------------+
+| 2023-01-26                          |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #13 
+mysql> SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH);
+--------------
+SELECT DATE_ADD(CURDATE(), INTERVAL 1 MONTH)
+--------------
+
++---------------------------------------+
+| DATE_ADD(CURDATE(), INTERVAL 1 MONTH) |
++---------------------------------------+
+| 2023-02-25                            |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #14 
+mysql> SELECT DATE_SUB(CURDATE(), INTERVAL 1 MONTH);
+--------------
+SELECT DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+--------------
+
++---------------------------------------+
+| DATE_SUB(CURDATE(), INTERVAL 1 MONTH) |
++---------------------------------------+
+| 2022-12-25                            |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #15 
+mysql> SELECT DATE_ADD('2022-01-29', INTERVAL 1 MONTH);
+--------------
+SELECT DATE_ADD('2022-01-29', INTERVAL 1 MONTH)
+--------------
+
++------------------------------------------+
+| DATE_ADD('2022-01-29', INTERVAL 1 MONTH) |
++------------------------------------------+
+| 2022-02-28                               |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #16 
+mysql> SELECT DATE_ADD('2022-01-29', INTERVAL 30 DAY);
+--------------
+SELECT DATE_ADD('2022-01-29', INTERVAL 30 DAY)
+--------------
+
++-----------------------------------------+
+| DATE_ADD('2022-01-29', INTERVAL 30 DAY) |
++-----------------------------------------+
+| 2022-02-28                              |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> -- Question #17 
+mysql> SELECT DATE_ADD('2020-01-29', INTERVAL 31 DAY);
+--------------
+SELECT DATE_ADD('2020-01-29', INTERVAL 31 DAY)
+--------------
+
++-----------------------------------------+
+| DATE_ADD('2020-01-29', INTERVAL 31 DAY) |
++-----------------------------------------+
+| 2020-02-29                              |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> notee

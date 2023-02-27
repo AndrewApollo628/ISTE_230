@@ -1,0 +1,217 @@
+mysql> --Apollo,Andrew
+    -> ;
+--------------
+--Apollo,Andrew
+--------------
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--Apollo,Andrew' at line 1
+mysql> -- Apollo, Andrew
+mysql> -- Database Homework PE03
+mysql> -- Spring 2023
+mysql> -- ISTE 230 Section 2
+mysql> -- PE#03
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\PE03_Apollo.sql
+--------------
+DROP DATABASE IF EXISTS  PE3
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+CREATE DATABASE PE3
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+--------------
+CREATE TABLE Automobile (
+    MAKE VARCHAR(15),
+    MODEL VARCHAR(15),
+    YEAR CHAR(4), 
+    COLOR CHAR(15),
+    STYLE CHAR(15),
+    MSRP DOUBLE,
+    VIN SMALLINT(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, 
+    PRIMARY KEY(VIN)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 3 warnings (0.01 sec)
+
+--------------
+INSERT INTO Automobile(
+    MAKE,
+    MODEL,
+    YEAR,
+    COLOR,
+    STYLE,
+    MSRP
+)
+
+VALUES(
+    'Chevy',
+    'Volt',
+    '2017',
+    'White',
+    'Hybrid',
+    '39290.99'
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO Automobile(
+    MAKE,
+    MODEL,
+    YEAR,
+    COLOR,
+    STYLE,
+    MSRP
+)
+
+VALUES(
+    'Ford',
+    'Mustang',
+    '2019',
+    'Blue',
+    'Convertible',
+    '47900.99'
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO Automobile(
+    MAKE,
+    MODEL,
+    YEAR,
+    COLOR,
+    STYLE,
+    MSRP
+)
+
+VALUES(
+    'Toyota',
+    'Prius',
+    '2018',
+    'Silver',
+    'Hybrid',
+    '25000.50'
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO Automobile(
+    MAKE,
+    MODEL,
+    YEAR,
+    COLOR,
+    STYLE,
+    MSRP
+)
+
+VALUES(
+    'Toyota',
+    'Camery',
+    '2008',
+    'Blue',
+    'Sedan',
+    '2000.50'
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO Automobile(
+    MAKE,
+    MODEL,
+    YEAR,
+    COLOR,
+    STYLE,
+    MSRP
+)
+
+VALUES(
+    'Dodge',
+    '1500',
+    '2007',
+    'Green',
+    'Pickup',
+    '1799.99'
+)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM AUTOMOBILE;
+--------------
+SELECT * FROM AUTOMOBILE
+--------------
+
++--------+---------+------+--------+-------------+----------+-------+
+| MAKE   | MODEL   | YEAR | COLOR  | STYLE       | MSRP     | VIN   |
++--------+---------+------+--------+-------------+----------+-------+
+| Chevy  | Volt    | 2017 | White  | Hybrid      | 39290.99 | 00001 |
+| Ford   | Mustang | 2019 | Blue   | Convertible | 47900.99 | 00002 |
+| Toyota | Prius   | 2018 | Silver | Hybrid      |  25000.5 | 00003 |
+| Toyota | Camery  | 2008 | Blue   | Sedan       |   2000.5 | 00004 |
+| Dodge  | 1500    | 2007 | Green  | Pickup      |  1799.99 | 00005 |
++--------+---------+------+--------+-------------+----------+-------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM AUTOMOBILE\G;
+--------------
+SELECT * FROM AUTOMOBILE
+--------------
+
+*************************** 1. row ***************************
+ MAKE: Chevy
+MODEL: Volt
+ YEAR: 2017
+COLOR: White
+STYLE: Hybrid
+ MSRP: 39290.99
+  VIN: 00001
+*************************** 2. row ***************************
+ MAKE: Ford
+MODEL: Mustang
+ YEAR: 2019
+COLOR: Blue
+STYLE: Convertible
+ MSRP: 47900.99
+  VIN: 00002
+*************************** 3. row ***************************
+ MAKE: Toyota
+MODEL: Prius
+ YEAR: 2018
+COLOR: Silver
+STYLE: Hybrid
+ MSRP: 25000.5
+  VIN: 00003
+*************************** 4. row ***************************
+ MAKE: Toyota
+MODEL: Camery
+ YEAR: 2008
+COLOR: Blue
+STYLE: Sedan
+ MSRP: 2000.5
+  VIN: 00004
+*************************** 5. row ***************************
+ MAKE: Dodge
+MODEL: 1500
+ YEAR: 2007
+COLOR: Green
+STYLE: Pickup
+ MSRP: 1799.99
+  VIN: 00005
+5 rows in set (0.00 sec)
+
+
+mysql> notee

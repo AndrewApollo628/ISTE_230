@@ -1,0 +1,522 @@
+mysql> show databases;
+--------------
+show databases
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lawncare           |
+| myfirstdb          |
+| mysql              |
+| performance_schema |
+| studentdb          |
+| sys                |
+| titanic            |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> DROP DATABASE IF EXISTS  College; 
+--------------
+DROP DATABASE IF EXISTS  College
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> CREATE DATABASE College;
+--------------
+CREATE DATABASE College
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> USE College;
+Database changed
+mysql> 
+mysql> SHOW TABLES;
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE advisor(
+    -> 	employeeID      varchar(9),
+    -> 	firstName       varchar(25),
+    -> 	lastName        varchar(25),
+    -> 	departmentID    varchar(4),
+    -> 	departmentName  varchar(30));
+--------------
+CREATE TABLE advisor(
+	employeeID      varchar(9),
+	firstName       varchar(25),
+	lastName        varchar(25),
+	departmentID    varchar(4),
+	departmentName  varchar(30))
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> show tables;
+--------------
+show tables
+--------------
+
++-------------------+
+| Tables_in_college |
++-------------------+
+| advisor           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> describe advisor;
+--------------
+describe advisor
+--------------
+
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employeeID     | varchar(9)  | YES  |     | NULL    |       |
+| firstName      | varchar(25) | YES  |     | NULL    |       |
+| lastName       | varchar(25) | YES  |     | NULL    |       |
+| departmentID   | varchar(4)  | YES  |     | NULL    |       |
+| departmentName | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> explain advisor;
+--------------
+explain advisor
+--------------
+
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employeeID     | varchar(9)  | YES  |     | NULL    |       |
+| firstName      | varchar(25) | YES  |     | NULL    |       |
+| lastName       | varchar(25) | YES  |     | NULL    |       |
+| departmentID   | varchar(4)  | YES  |     | NULL    |       |
+| departmentName | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc advisor;
+--------------
+desc advisor
+--------------
+
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employeeID     | varchar(9)  | YES  |     | NULL    |       |
+| firstName      | varchar(25) | YES  |     | NULL    |       |
+| lastName       | varchar(25) | YES  |     | NULL    |       |
+| departmentID   | varchar(4)  | YES  |     | NULL    |       |
+| departmentName | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> show create table advisor 
+    -> ^C
+mysql> show create table advisor;
+--------------
+show create table advisor
+--------------
+
++---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                                                                                             |
++---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| advisor | CREATE TABLE `advisor` (
+  `employeeID` varchar(9) DEFAULT NULL,
+  `firstName` varchar(25) DEFAULT NULL,
+  `lastName` varchar(25) DEFAULT NULL,
+  `departmentID` varchar(4) DEFAULT NULL,
+  `departmentName` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++---------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE advisor ADD PRIMARY KEY(employeeID);
+--------------
+ALTER TABLE advisor ADD PRIMARY KEY(employeeID)
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc advisor;
+--------------
+desc advisor
+--------------
+
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employeeID     | varchar(9)  | NO   | PRI | NULL    |       |
+| firstName      | varchar(25) | YES  |     | NULL    |       |
+| lastName       | varchar(25) | YES  |     | NULL    |       |
+| departmentID   | varchar(4)  | YES  |     | NULL    |       |
+| departmentName | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\W2D1ClassExample.sql
+--------------
+SHOW DATABASES
+--------------
+
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| lawncare           |
+| myfirstdb          |
+| mysql              |
+| performance_schema |
+| studentdb          |
+| sys                |
+| titanic            |
++--------------------+
+9 rows in set (0.00 sec)
+
+--------------
+DROP DATABASE IF EXISTS  College
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+CREATE DATABASE College
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+--------------
+SHOW TABLES
+--------------
+
+Empty set (0.00 sec)
+
+--------------
+CREATE TABLE advisor(
+	employeeID      varchar(9),
+	firstName       varchar(25),
+	lastName        varchar(25),
+	departmentID    varchar(4),
+	departmentName  varchar(30))
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+show tables
+--------------
+
++-------------------+
+| Tables_in_college |
++-------------------+
+| advisor           |
++-------------------+
+1 row in set (0.00 sec)
+
+--------------
+describe advisor
+--------------
+
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employeeID     | varchar(9)  | YES  |     | NULL    |       |
+| firstName      | varchar(25) | YES  |     | NULL    |       |
+| lastName       | varchar(25) | YES  |     | NULL    |       |
+| departmentID   | varchar(4)  | YES  |     | NULL    |       |
+| departmentName | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+--------------
+ALTER TABLE advisor ADD PRIMARY KEY(employeeID)
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'123456789',
+	'Elissa',
+	'Weeden',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'012345678',
+	'Steve',
+	'Zilora',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'234567890',
+	'Ed',
+	'Holden',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'345678901',
+	'Dianne',
+	'Bills',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'456789012',
+	'Bill',
+	'Stratton',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'567890123',
+	'Jai',
+	'Kang',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'678901234',
+	'Nick',
+	'Therios',
+	'4002',
+	'Information Technology')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'789012345',
+	'Joe',
+	'Programmer',
+	'4003',
+	'Computer Science')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'890123456',
+	'Ima',
+	'Engineer',
+	'4010',
+	'Software Engineering'
+	)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO advisor(
+	employeeID,
+	firstName,
+	lastName,
+	departmentID,
+	departmentName)
+VALUES(
+	'901234567',
+	'Steve',
+	'Engineer',
+	'4010',
+	'Software Engineering'
+	)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+CREATE TABLE otherDeptFac(
+	empID		varchar(9),
+	nameF		varchar(25),
+	nameL		varchar(25),
+	advisingCode	boolean,
+	PRIMARY KEY (empID)      )
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+show tables
+--------------
+
++-------------------+
+| Tables_in_college |
++-------------------+
+| advisor           |
+| otherdeptfac      |
++-------------------+
+2 rows in set (0.00 sec)
+
+--------------
+describe otherDeptFac
+--------------
+
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| empID        | varchar(9)  | NO   | PRI | NULL    |       |
+| nameF        | varchar(25) | YES  |     | NULL    |       |
+| nameL        | varchar(25) | YES  |     | NULL    |       |
+| advisingCode | tinyint(1)  | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+--------------
+INSERT INTO otherDeptFac(
+	empID,
+	nameF,
+	nameL,
+	advisingCode)
+VALUES(
+	'987651234',
+	'Jane',
+	'Torre',
+	true)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO otherDeptFac(
+	empID,
+	nameF,
+	nameL,
+	advisingCode)
+VALUES(
+	'876543210',
+	'Joe',
+	'Nonadvisor',
+	false)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SELECT empID, nameF, nameL FROM otherDeptfac
+          WHERE advisingCode=true
+--------------
+
++-----------+-------+-------+
+| empID     | nameF | nameL |
++-----------+-------+-------+
+| 987651234 | Jane  | Torre |
++-----------+-------+-------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT * FROM advisor
+--------------
+
++------------+-----------+------------+--------------+------------------------+
+| employeeID | firstName | lastName   | departmentID | departmentName         |
++------------+-----------+------------+--------------+------------------------+
+| 012345678  | Steve     | Zilora     | 4002         | Information Technology |
+| 123456789  | Elissa    | Weeden     | 4002         | Information Technology |
+| 234567890  | Ed        | Holden     | 4002         | Information Technology |
+| 345678901  | Dianne    | Bills      | 4002         | Information Technology |
+| 456789012  | Bill      | Stratton   | 4002         | Information Technology |
+| 567890123  | Jai       | Kang       | 4002         | Information Technology |
+| 678901234  | Nick      | Therios    | 4002         | Information Technology |
+| 789012345  | Joe       | Programmer | 4003         | Computer Science       |
+| 890123456  | Ima       | Engineer   | 4010         | Software Engineering   |
+| 901234567  | Steve     | Engineer   | 4010         | Software Engineering   |
++------------+-----------+------------+--------------+------------------------+
+10 rows in set (0.00 sec)
+
+mysql> notee

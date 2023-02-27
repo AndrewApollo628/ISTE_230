@@ -1,0 +1,657 @@
+mysql> SELECT * FROM contact_info;
+--------------
+SELECT * FROM contact_info
+--------------
+
++-----------+-----------+---------------+----------+----------------------+--------------------------------+------------+-------------------------------------------------------+
+| contactID | firstName | middleInitial | lastName | email                | url                            | birthday   | notes                                                 |
++-----------+-----------+---------------+----------+----------------------+--------------------------------+------------+-------------------------------------------------------+
+|         1 | David     | C             | Munson   | munson@rit.edu       | http://www.rit.edu/president   | NULL       | Started as President of RIT on July 1, 2017.          |
+|         2 | James     | R             | Habermas | Jim.Habermas@rit.edu | http://www.rit.edu/            | 1962-04-28 | Wife: Dawn Kids: Brittany, Brandon.                   |
+|         3 | Ely       | T             | Walloby  | etwalloby@concor.com | http://www.concor.com/~walloby | 1956-03-26 | All meetings must be scheduled through his assistant. |
+|         4 | Eve       | C             | Sampson  | esampson@concor.com  | NULL                           | 1972-05-11 | Very helpful.                                         |
+|         5 | Carson    | B             | Campbell | cbc232@mvch.orf      | NULL                           | 1955-01-05 | Wife: Lisa Kids: Lucas, Lucy and Lucinda.             |
++-----------+-----------+---------------+----------+----------------------+--------------------------------+------------+-------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> system cls;
+mysql> UPDATE cotact_info SET email="CarsonB@gmail.com" WHERE contactID = 5;
+--------------
+UPDATE cotact_info SET email="CarsonB@gmail.com" WHERE contactID = 5
+--------------
+
+ERROR 1146 (42S02): Table 'conman.cotact_info' doesn't exist
+mysql> UPDATE contact_info SET email="CarsonB@gmail.com" WHERE contactID = 5;
+--------------
+UPDATE contact_info SET email="CarsonB@gmail.com" WHERE contactID = 5
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info
+    -> SET email="EveSampson@gmail.com",
+    -> url="https://craftypapercreations.com"
+    -> WHERE contactID = 4;
+--------------
+UPDATE contact_info
+SET email="EveSampson@gmail.com",
+url="https://craftypapercreations.com"
+WHERE contactID = 4
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> DESC contact_ifo;
+--------------
+DESC contact_ifo
+--------------
+
+ERROR 1146 (42S02): Table 'conman.contact_ifo' doesn't exist
+mysql> DESC contact_info;
+--------------
+DESC contact_info
+--------------
+
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| contactID     | int          | NO   | PRI | NULL    |       |
+| firstName     | varchar(15)  | YES  |     | NULL    |       |
+| middleInitial | char(1)      | YES  |     | NULL    |       |
+| lastName      | varchar(25)  | YES  |     | NULL    |       |
+| email         | varchar(40)  | YES  |     | NULL    |       |
+| url           | varchar(55)  | YES  |     | NULL    |       |
+| birthday      | date         | YES  |     | NULL    |       |
+| notes         | varchar(255) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE contact_info 
+    -> ADD COLUMN prefix VARCHAR(10) AFTER contactID;
+--------------
+ALTER TABLE contact_info 
+ADD COLUMN prefix VARCHAR(10) AFTER contactID
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC contact_info;
+--------------
+DESC contact_info
+--------------
+
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| contactID     | int          | NO   | PRI | NULL    |       |
+| prefix        | varchar(10)  | YES  |     | NULL    |       |
+| firstName     | varchar(15)  | YES  |     | NULL    |       |
+| middleInitial | char(1)      | YES  |     | NULL    |       |
+| lastName      | varchar(25)  | YES  |     | NULL    |       |
+| email         | varchar(40)  | YES  |     | NULL    |       |
+| url           | varchar(55)  | YES  |     | NULL    |       |
+| birthday      | date         | YES  |     | NULL    |       |
+| notes         | varchar(255) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> UPDATE contact_info SET prefix = "DR." WHERE contactID = 1;
+--------------
+UPDATE contact_info SET prefix = "DR." WHERE contactID = 1
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info SET prefix = "Mr." WHERE contactID = 2;
+--------------
+UPDATE contact_info SET prefix = "Mr." WHERE contactID = 2
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info SET prefix = "Dr." WHERE contactID = 1;
+--------------
+UPDATE contact_info SET prefix = "Dr." WHERE contactID = 1
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info SET prefix = "Mr." WHERE contactID = 3;
+--------------
+UPDATE contact_info SET prefix = "Mr." WHERE contactID = 3
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info SET prefix = "Ms." WHERE contactID = 4;
+--------------
+UPDATE contact_info SET prefix = "Ms." WHERE contactID = 4
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE contact_info SET prefix = "Mr." WHERE contactID = 5;
+--------------
+UPDATE contact_info SET prefix = "Mr." WHERE contactID = 5
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ^C
+mysql> SELECT * FROM contact_info;
+--------------
+SELECT * FROM contact_info
+--------------
+
++-----------+--------+-----------+---------------+----------+----------------------+----------------------------------+------------+-------------------------------------------------------+
+| contactID | prefix | firstName | middleInitial | lastName | email                | url                              | birthday   | notes                                                 |
++-----------+--------+-----------+---------------+----------+----------------------+----------------------------------+------------+-------------------------------------------------------+
+|         1 | Dr.    | David     | C             | Munson   | munson@rit.edu       | http://www.rit.edu/president     | NULL       | Started as President of RIT on July 1, 2017.          |
+|         2 | Mr.    | James     | R             | Habermas | Jim.Habermas@rit.edu | http://www.rit.edu/              | 1962-04-28 | Wife: Dawn Kids: Brittany, Brandon.                   |
+|         3 | Mr.    | Ely       | T             | Walloby  | etwalloby@concor.com | http://www.concor.com/~walloby   | 1956-03-26 | All meetings must be scheduled through his assistant. |
+|         4 | Ms.    | Eve       | C             | Sampson  | EveSampson@gmail.com | https://craftypapercreations.com | 1972-05-11 | Very helpful.                                         |
+|         5 | Mr.    | Carson    | B             | Campbell | CarsonB@gmail.com    | NULL                             | 1955-01-05 | Wife: Lisa Kids: Lucas, Lucy and Lucinda.             |
++-----------+--------+-----------+---------------+----------+----------------------+----------------------------------+------------+-------------------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> ALTER TABLE contact_info 
+    -> MODIFY prefix VARCHAR (10) NOT NULL;
+--------------
+ALTER TABLE contact_info 
+MODIFY prefix VARCHAR (10) NOT NULL
+--------------
+
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE contact_info 
+    -> MODIFY lastName VARCHAR (25) NOT NULL;
+--------------
+ALTER TABLE contact_info 
+MODIFY lastName VARCHAR (25) NOT NULL
+--------------
+
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE contact_info 
+    -> MODIFY url VARCHAR (55) DEFAULT "http://";
+--------------
+ALTER TABLE contact_info 
+MODIFY url VARCHAR (55) DEFAULT "http://"
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE contact_info SET firstName = "Really long name for this person"
+    -> WHERE contactID = 2;
+--------------
+UPDATE contact_info SET firstName = "Really long name for this person"
+WHERE contactID = 2
+--------------
+
+ERROR 1406 (22001): Data too long for column 'firstName' at row 1
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\W3D1College.sql;
+ERROR: 
+Failed to open file 'C:\Users\Andrew Apollo\ISTE230\sourcefiles\W3D1College.sql;', error: 2
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\W3D1College.sql
+--------------
+CREATE DATABASE  IF NOT EXISTS `college` /*!40100 DEFAULT CHARACTER SET utf8 */
+--------------
+
+Query OK, 1 row affected, 2 warnings (0.00 sec)
+
+Database changed
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET NAMES utf8 */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40103 SET TIME_ZONE='+00:00' */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `otherdeptfac`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @saved_cs_client     = @@character_set_client */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET character_set_client = utf8 */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE TABLE `otherdeptfac` (
+  `empID` varchar(9) NOT NULL DEFAULT '',
+  `nameF` varchar(25) DEFAULT NULL,
+  `nameL` varchar(25) DEFAULT NULL,
+  `advisingCode` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`empID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+--------------
+/*!40101 SET character_set_client = @saved_cs_client */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+LOCK TABLES `otherdeptfac` WRITE
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `otherdeptfac` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+INSERT INTO `otherdeptfac` VALUES ('876543210','Joe','Nonadvisor',0),('987654321','Jane','Doe',1)
+--------------
+
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+--------------
+/*!40000 ALTER TABLE `otherdeptfac` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+UNLOCK TABLES
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `departments`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @saved_cs_client     = @@character_set_client */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET character_set_client = utf8 */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE TABLE `departments` (
+  `departmentID` varchar(4) NOT NULL,
+  `departmentName` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`departmentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+/*!40101 SET character_set_client = @saved_cs_client */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+LOCK TABLES `departments` WRITE
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `departments` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+INSERT INTO `departments` VALUES ('4002','Information Technology'),('4003','Computer Science'),('4010','Software Engineering'),('4050','NSSA')
+--------------
+
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+--------------
+/*!40000 ALTER TABLE `departments` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+UNLOCK TABLES
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS `advisor`
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET @saved_cs_client     = @@character_set_client */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET character_set_client = utf8 */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE TABLE `advisor` (
+  `employeeID` varchar(9) NOT NULL DEFAULT '',
+  `firstName` varchar(25) DEFAULT NULL,
+  `lastName` varchar(25) DEFAULT NULL,
+  `departmentID` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`employeeID`),
+  KEY `departmentID_FK` (`departmentID`),
+  CONSTRAINT `departmentID_FK` FOREIGN KEY (`departmentID`) REFERENCES `departments` (`departmentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+/*!40101 SET character_set_client = @saved_cs_client */
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+LOCK TABLES `advisor` WRITE
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40000 ALTER TABLE `advisor` DISABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+INSERT INTO `advisor` VALUES ('012345678','Steve','Zilora','4002'),('123456789','Elissa','Weeden','4002'),('234567890','Ed','Holden','4002'),('345678901','Dianne','Bills','4002'),('456789012','Bill','Stratton','4002'),('567890123','Jai','Kang','4002'),('678901234','Nick','Therios','4002'),('789012345','Joe','Programmer','4003'),('890123456','Ima','Engineer','4010'),('901234567','Steve','Engineer','4010'),('987654321','Jane','Doe','4050')
+--------------
+
+Query OK, 11 rows affected (0.00 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+--------------
+/*!40000 ALTER TABLE `advisor` ENABLE KEYS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+UNLOCK TABLES
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
+--------------
+show tables
+--------------
+
++-------------------+
+| Tables_in_college |
++-------------------+
+| advisor           |
+| departments       |
+| otherdeptfac      |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\W3D2Student.sql
+Database changed
+--------------
+INSERT INTO departments values ("2000","BUS - HR")
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO departments values ("500","Physician Assistant")
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+DROP TABLE IF EXISTS student
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+--------------
+CREATE TABLE student(
+studentID varchar(9),
+lastName varchar(20) NOT NULL,
+firstName varchar(20),
+homeAddress varchar(30),
+collegeAddress varchar(30),
+advisorID char(9) COMMENT "WILL BE FK CONNECTING TO ADVISOR TABLE",
+departmentID varchar(4) NOT NULL COMMENT "WILL BE FK CONNECTING TO MAJOR TABLE",
+CONSTRAINT chk_deptID CHECK (departmentID <> '0000'),
+graduated tinyint(1) unsigned DEFAULT 0 NOT NULL,
+CONSTRAINT studentIDPK PRIMARY KEY(studentID),
+CONSTRAINT fk_advisorID FOREIGN KEY (advisorID) REFERENCES advisor(employeeID),
+CONSTRAINT fk_departmentID FOREIGN KEY (departmentID) REFERENCES departments(departmentID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+--------------
+INSERT INTO student values
+("123123123","Burns","Jeff","8015 Arlington, Plymouth, MI", "Haffey Hall Apt 503",
+ "345678901","500",1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("987654321","Wilcox","Dawn","31 Captiva, Rochester, NY", "Haffey Hall Apt 301",
+ "012345678","2000",0)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("233333333","French","Brian","3243 Main, Avon, NY", "Haffey Hall Apt 503",
+ "345678901","500",1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("120050789","Floeser","Michael","2 Main, Honeoy,Falls NY", "Brigs Hall Apt 503",
+ "012345678","4002",0)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("987659009","Smith","Dawn","202 South St., Rochester, NY", "Haffey Hall Apt 301",
+ "012345678","2000",0)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("133333330","Miller","Guy","32 Oak St., Plymouth, MI", "Haffey Hall Apt 503",
+ "345678901","500",1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("987220220","Wilcox","Kim","2299 West Main, Rochester, NY", "Haffey Hall Apt 301",
+ "012345678","4002",0)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO student values
+("121212121","Habermas","Jim","32 Main, Plymouth, MI", "Haffey Hall Apt 503",
+ "234567890","4003",1)
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+SELECT TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME,  COLUMN_NAME
+    FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+     WHERE REFERENCED_TABLE_SCHEMA IS NOT NULL
+         ORDER BY TABLE_SCHEMA DESC, TABLE_NAME
+--------------
+
++--------------+------------+-----------------+--------------+
+| TABLE_SCHEMA | TABLE_NAME | CONSTRAINT_NAME | COLUMN_NAME  |
++--------------+------------+-----------------+--------------+
+| college      | advisor    | departmentID_FK | departmentID |
+| college      | student    | fk_advisorID    | advisorID    |
+| college      | student    | fk_departmentID | departmentID |
++--------------+------------+-----------------+--------------+
+3 rows in set (0.01 sec)
+

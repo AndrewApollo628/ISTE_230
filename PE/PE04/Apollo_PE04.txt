@@ -1,0 +1,278 @@
+mysql> -- Question #1
+mysql> SELECT title AS 'Title of Film', length AS 'Length of Film', RIGHT(description,50) AS 'Part of Description (Right side)' FROM film
+    -> WHERE length <= 100 AND 
+    -> description LIKE '%fun%';
+--------------
+SELECT title AS 'Title of Film', length AS 'Length of Film', RIGHT(description,50) AS 'Part of Description (Right side)' FROM film
+WHERE length <= 100 AND 
+description LIKE '%fun%'
+--------------
+
++---------------------+----------------+----------------------------------------------------+
+| Title of Film       | Length of Film | Part of Description (Right side)                   |
++---------------------+----------------+----------------------------------------------------+
+| ALONE TRIP          |             82 | g who must Outrun a Boat in An Abandoned Fun House |
+| ANYTHING SAVANNAH   |             82 | ho must Chase a Feminist in An Abandoned Fun House |
+| BEDAZZLED MARRIED   |             73 | ust Meet a Mad Scientist in An Abandoned Fun House |
+| BLUES INSTINCT      |             50 |  a Forensic Psychologist in An Abandoned Fun House |
+| BORROWERS BEDAZZLED |             63 |  who must Outsmart a Man in An Abandoned Fun House |
+| CLUELESS BUCKET     |             95 | ust Help a Sumo Wrestler in An Abandoned Fun House |
+| ISHTAR ROCKETEER    |             79 | rrel who must Help a Dog in An Abandoned Fun House |
+| ISLAND EXORCIST     |             84 |  who must Find a Dentist in An Abandoned Fun House |
+| SADDLE ANTITRUST    |             80 | rk who must Save a Woman in An Abandoned Fun House |
+| SENSE GREEK         |             54 | t Escape a Sumo Wrestler in An Abandoned Fun House |
+| SHANGHAI TYCOON     |             47 | who must Build a Husband in An Abandoned Fun House |
++---------------------+----------------+----------------------------------------------------+
+11 rows in set (0.00 sec)
+
+mysql> -- Question #2
+mysql> SELECT title AS 'Title of Film', length AS 'Length of Film', RIGHT(description,60) AS 'Part of Description (Right side)' FROM film
+    -> WHERE description LIKE '%Database%' OR 
+    -> description LIKE '%California%';
+--------------
+SELECT title AS 'Title of Film', length AS 'Length of Film', RIGHT(description,60) AS 'Part of Description (Right side)' FROM film
+WHERE description LIKE '%Database%' OR 
+description LIKE '%California%'
+--------------
+
++-------------------------+----------------+--------------------------------------------------------------+
+| Title of Film           | Length of Film | Part of Description (Right side)                             |
++-------------------------+----------------+--------------------------------------------------------------+
+| ACE GOLDFINGER          |             48 | istrator And a Explorer who must Find a Car in Ancient China |
+| ALABAMA DEVIL           |            114 |  Mad Scientist who must Outrun a Mad Scientist in A Jet Boat |
+| ALICE NEVERMORE         |             94 | atabase Administrator who must Vanquish a Pioneer in Georgia |
+| AMERICAN CIRCUS         |            129 | onaut who must Face a Database Administrator in A Shark Tank |
+| AMISTAD MIDSUMMER       |             85 |  And a Crocodile who must Meet a Sumo Wrestler in California |
+| ANONYMOUS HUMAN         |            179 | ut who must Outrace a Database Administrator in A Shark Tank |
+| ANTITRUST TOMATOES      |            168 |  who must Outsmart a Database Administrator in Ancient India |
+| ARMY FLINTSTONES        |            148 | inistrator And a Athlete who must Save a Waitress in Nigeria |
+| ARTIST COLDBLOODED      |            170 | n of a Robot And a Moose who must Race a Woman in California |
+| BALLROOM MOCKINGBIRD    |            173 | Composer And a Monkey who must Find a Feminist in California |
+| BIRDS PERDITION         |             61 | of a Athlete And a Pioneer who must Face a Dog in California |
+| BOUND CHEAPER           |             98 | rator And a Astronaut who must Race a Lumberjack in A Baloon |
+| BOWFINGER GABLES        |             72 | tress And a Composer who must Outrun a Dentist in California |
+| BATTLE PANTHER          |             67 | Database Administrator who must Face a Hunter in New Orleans |
+| CALIFORNIA BIRDS        |             75 | obot who must Save a Database Administrator in Ancient India |
+
+|...... Deleted Rows......................................................................................|
+
+| TRAP GUYS               |            110 |  who must Race a Database Administrator in The Sahara Desert |
+| TREASURE COMMAND        |            102 | a Car And a Madman who must Discover a Pioneer in California |
+| TRUMAN CRAZY            |             92 |  a Boy who must Meet a Database Administrator in A Monastery |
+| VALENTINE VANISHING     |             48 | band And a Butler who must Reach a Pastry Chef in California |
+| VANISHED GARDEN         |            142 | rel And a A Shark who must Defeat a Lumberjack in California |
+| VIRGINA DAISY           |            179 | tist who must Reach a Database Administrator in A Shark Tank |
+| VIRTUAL SPOILERS        |            144 | trator And a Squirrel who must Discover a Student in Georgia |
+| VOLUME HOUSE            |            132 | e of a Dog And a Woman who must Meet a Dentist in California |
+| WARS PLUTO              |            128 | e Administrator who must Chase a Madman in The Sahara Desert |
+| WASTELAND DIVINE        |             85 | te who must Rescue a Database Administrator in Ancient China |
+| WEST LION               |            159 |  must Race a Database Administrator in A Manhattan Penthouse |
+| WHALE BIKINI            |            109 | ministrator who must Defeat a Feminist in A MySQL Convention |
+| YOUNG LANGUAGE          |            183 | trator who must Meet a Boy in The First Manned Space Station |
++-------------------------+----------------+--------------------------------------------------------------+
+115 rows in set (0.00 sec)
+
+mysql> -- Question #3
+mysql> SELECT title AS Title, length AS 'Length of Film', rating AS Rating FROM film
+    -> WHERE length >=120 AND length <=140 AND
+    -> rating = 'G';
+--------------
+SELECT title AS Title, length AS 'Length of Film', rating AS Rating FROM film
+WHERE length >=120 AND length <=140 AND
+rating = 'G'
+--------------
+
++----------------------+----------------+--------+
+| Title                | Length of Film | Rating |
++----------------------+----------------+--------+
+| AFRICAN EGG          |            130 | G      |
+| ALAMO VIDEOTAPE      |            126 | G      |
+| BAREFOOT MANCHURIAN  |            129 | G      |
+| BEACH HEARTBREAKERS  |            122 | G      |
+| BREAKFAST GOLDFINGER |            123 | G      |
+| CHATTY BEHAVIOR      |            124 | G      |
+| DAZED PUNK           |            120 | G      |
+| DECEIVER BETRAYED    |            122 | G      |
+| DOGMA FAMILY         |            122 | G      |
+| DUDE BLINDNESS       |            132 | G      |
+| EXTRAORDINARY HELPER |            122 | G      |
+| FANTASIA PARK        |            131 | G      |
+| FARGO GANDHI         |            130 | G      |
+| GOSFORD DONNIE       |            129 | G      |
+| GREASE YOUTH         |            135 | G      |
+| JUST A RUN           |            135 | G      |
+| LIBERTY MAGNIFICENT  |            138 | G      |
+| SAINTS BRIDE         |            125 | G      |
+| SHINING ROSES        |            125 | G      |
+| STRANGER STRANGERS   |            139 | G      |
+| TRAFFIC HOBBIT       |            139 | G      |
+| WARS PLUTO           |            128 | G      |
++----------------------+----------------+--------+
+22 rows in set (0.00 sec)
+
+mysql> -- Question #4
+mysql> SELECT title AS 'Movie Title', length AS 'Length of Film', rating AS Rating FROM film
+    -> WHERE (title LIKE '%river%') AND
+    -> (rating = 'R' OR
+    -> rating = 'PG-13');
+--------------
+SELECT title AS 'Movie Title', length AS 'Length of Film', rating AS Rating FROM film
+WHERE (title LIKE '%river%') AND
+(rating = 'R' OR
+rating = 'PG-13')
+--------------
+
++--------------+----------------+--------+
+| Movie Title  | Length of Film | Rating |
++--------------+----------------+--------+
+| DRIVER ANNIE |            159 | PG-13  |
+| GOLD RIVER   |            154 | R      |
+| RIVER OUTLAW |            149 | PG-13  |
++--------------+----------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> -- Question #5
+mysql> SELECT title AS Title, length AS 'Film Length', release_year AS 'Release Year', rating AS 'Film Rating' FROM film
+    -> WHERE release_year > 2012 AND 
+    -> length > 160 AND
+    -> (rating = 'G' OR rating = 'PG-13');
+--------------
+SELECT title AS Title, length AS 'Film Length', release_year AS 'Release Year', rating AS 'Film Rating' FROM film
+WHERE release_year > 2012 AND 
+length > 160 AND
+(rating = 'G' OR rating = 'PG-13')
+--------------
+
++------------------+-------------+--------------+-------------+
+| Title            | Film Length | Release Year | Film Rating |
++------------------+-------------+--------------+-------------+
+| CITIZEN SHREK    |         165 |         2013 | G           |
+| HELPER NUTS      |         173 |         2013 | G           |
+| DARLING BREAKING |         165 |         2013 | PG-13       |
+| KISS GLORY       |         163 |         2019 | PG-13       |
+| NAME DETECTIVE   |         178 |         2013 | PG-13       |
+| ROCKETEER MOTHER |         178 |         2013 | PG-13       |
+| THEORY MERMAID   |         184 |         2013 | PG-13       |
+| YOUNG LANGUAGE   |         183 |         2013 | G           |
++------------------+-------------+--------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> -- Question #6
+mysql> SELECT title AS 'Film Title', replacement_cost AS 'Replacement Cost', rating AS 'Film Rating' FROM film
+    -> WHERE title NOT LIKE '_a%' AND 
+    -> replacement_cost = 19.99;
+--------------
+SELECT title AS 'Film Title', replacement_cost AS 'Replacement Cost', rating AS 'Film Rating' FROM film
+WHERE title NOT LIKE '_a%' AND 
+replacement_cost = 19.99
+--------------
+
++-------------------------+------------------+-------------+
+| Film Title              | Replacement Cost | Film Rating |
++-------------------------+------------------+-------------+
+| ANALYZE HOOSIERS        |            19.99 | R           |
+| BOWFINGER GABLES        |            19.99 | NR          |
+| COLOR PHILADELPHIA      |            19.99 | G           |
+| COMMAND RUSH            |            19.99 | PG-13       |
+| CROSSING DIVORCE        |            19.99 | R           |
+| DESTINATION JERK        |            19.99 | PG-13       |
+| DIVINE RESURRECTION     |            19.99 | R           |
+| DOWNHILL ENOUGH         |            19.99 | G           |
+| DRAGONFLY STRANGERS     |            19.99 | NR          |
+| ELF MURDER              |            19.99 | NR          |
+| ENTRAPMENT SATISFACTION |            19.99 | R           |
+| GROSSE WONDERFUL        |            19.99 | R           |
+| HEAVEN FREEDOM          |            19.99 | PG          |
+| HOCUS FRIDA             |            19.99 | G           |
+| HOMEWARD CIDER          |            19.99 | R           |
+| HYSTERICAL GRAIL        |            19.99 | PG          |
+| LUCKY RESCUE            |            19.99 | PG-13       |
+| MIDNIGHT WESTWARD       |            19.99 | G           |
+| MIRACLE VIRTUAL         |            19.99 | PG-13       |
+| MYSTIC TRUMAN           |            19.99 | NR          |
+| NOTTING SPEAKEASY       |            19.99 | PG-13       |
+| PINK SUBMARINE          |            19.99 | G           |
+| PERSONAL LADYBUGS       |            19.99 | PG-13       |
+| PLACE FEAR              |            19.99 | NR          |
+| QUILLS BULL             |            19.99 | R           |
+| RULES HUMAN             |            19.99 | R           |
+| SINNERS ATLANTIS        |            19.99 | NR          |
+| SISTER FREDDY           |            19.99 | PG-13       |
+| SPARTACUS CHEAPER       |            19.99 | R           |
+| SPEED SUIT              |            19.99 | PG-13       |
+| STAGE WORLD             |            19.99 | PG          |
+| STONE FIRE              |            19.99 | G           |
+| STRAIGHT HOURS          |            19.99 | R           |
+| SUNRISE LEAGUE          |            19.99 | PG-13       |
+| SWEDEN SHINING          |            19.99 | PG          |
+| TREATMENT JEKYLL        |            19.99 | PG          |
+| VICTORY ACADEMY         |            19.99 | PG-13       |
+| WEREWOLF LOLA           |            19.99 | R           |
+| WONDERLAND HOLIDAY      |            19.99 | PG          |
++-------------------------+------------------+-------------+
+39 rows in set (0.00 sec)
+
+mysql> -- Question #7
+mysql> SELECT title AS Title, LEFT(description,55) AS 'Partial Description (LEFT)' FROM film
+    -> WHERE description LIKE '%Frisbee%'
+    -> AND description LIKE '%Fanciful%';
+--------------
+SELECT title AS Title, LEFT(description,55) AS 'Partial Description (LEFT)' FROM film
+WHERE description LIKE '%Frisbee%'
+AND description LIKE '%Fanciful%'
+--------------
+
++-------------+---------------------------------------------------------+
+| Title       | Partial Description (LEFT)                              |
++-------------+---------------------------------------------------------+
+| A FAIR RACE | A Fanciful Documentary of a Frisbee And a Lumberjack wh |
+| STING PIE   | A Fanciful Drama of a Frisbee And a Dog who must Rescue |
++-------------+---------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- Question #8
+mysql> SELECT title AS 'Title of Film', rating AS 'Film Rating', release_year AS 'Release Year' FROM film
+    -> WHERE (rating = 'G' AND release_year = '2006') OR
+    -> (rating = 'PG' AND release_year = '2010');
+--------------
+SELECT title AS 'Title of Film', rating AS 'Film Rating', release_year AS 'Release Year' FROM film
+WHERE (rating = 'G' AND release_year = '2006') OR
+(rating = 'PG' AND release_year = '2010')
+--------------
+
++------------------------+-------------+--------------+
+| Title of Film          | Film Rating | Release Year |
++------------------------+-------------+--------------+
+| AFRICAN EGG            | G           |         2006 |
+| AGENT TRUMAN           | PG          |         2010 |
+| ANNIE IDENTITY         | G           |         2006 |
+| BAKED CLAMS            | G           |         2006 |
+| BEACH HEARTBREAKERS    | G           |         2006 |
+| BLACKOUT PRIVATE       | PG          |         2010 |
+| BLOOD ARGONAUTS        | G           |         2006 |
+| BULWORTH COMMANDMENTS  | G           |         2006 |
+| CHAMPION FLATLINERS    | PG          |         2010 |
+| CHICKEN RESCUERS       | PG          |         2010 |
+| CHAIN LOCK             | G           |         2006 |
+| CIDER DESTINY          | PG          |         2010 |
+| CLASH FREDDY           | G           |         2006 |
+| CONNECTION MICROCOSMOS | G           |         2006 |
+| CRUELTY UNFORGIVEN     | G           |         2006 |
+| DARN FORRESTER         | G           |         2006 |
+| DEER VIRGINIAN         | G           |         2006 |
+| DISCIPLE MOTHER        | PG          |         2010 |
+|....Deleted Rows.....................................|
+| SUGAR WONKA            | PG          |         2010 |
+| SUMMER SCARFACE        | G           |         2006 |
+| SUPERFLY TRIP          | PG          |         2010 |
+| TEQUILA PAST           | PG          |         2010 |
+| TRAFFIC HOBBIT         | G           |         2006 |
+| TYCOON GATHERING       | G           |         2006 |
+| VARSITY TRIP           | PG          |         2010 |
+| WAR NOTTING            | G           |         2006 |
+| WATERSHIP FRONTIER     | G           |         2006 |
+| WONDERLAND HOLIDAY     | PG          |         2010 |
++------------------------+-------------+--------------+
+59 rows in set (0.00 sec)
+
+mysql> notee

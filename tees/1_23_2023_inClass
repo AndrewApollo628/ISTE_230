@@ -1,0 +1,456 @@
+mysql> DROP DATABASE IF EXISTS  myfirstdb; 
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> 
+mysql> CREATE DATABASE myfirstdb;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE myfirstdb;
+Database changed
+mysql> CREATE TABLE supplier (
+    ->    supplierID SMALLINT UNSIGNED AUTO_INCREMENT,
+    ->    supplierName VARCHAR(40) NOT NULL,
+    ->    phone VARCHAR(14) NOT NULL,
+    ->    email VARCHAR(60) NULL,
+    ->    CONSTRAINT supplier_supplierID_pk PRIMARY KEY (SupplierID)
+    ->    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> show tables 
+    -> ^C
+mysql> show tables;
++---------------------+
+| Tables_in_myfirstdb |
++---------------------+
+| supplier            |
++---------------------+
+1 row in set (0.01 sec)
+
+mysql> desc supplier;
++--------------+-------------------+------+-----+---------+----------------+
+| Field        | Type              | Null | Key | Default | Extra          |
++--------------+-------------------+------+-----+---------+----------------+
+| supplierID   | smallint unsigned | NO   | PRI | NULL    | auto_increment |
+| supplierName | varchar(40)       | NO   |     | NULL    |                |
+| phone        | varchar(14)       | NO   |     | NULL    |                |
+| email        | varchar(60)       | YES  |     | NULL    |                |
++--------------+-------------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> INSERT INTO supplier(supplierName, phone, email) 
+    ->      VALUES("ABC_Supplier","(313)112-2334","staff@ABC_Suplier.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM supplier;
++------------+--------------+---------------+-----------------------+
+| supplierID | supplierName | phone         | email                 |
++------------+--------------+---------------+-----------------------+
+|          1 | ABC_Supplier | (313)112-2334 | staff@ABC_Suplier.com |
++------------+--------------+---------------+-----------------------+
+1 row in set (0.00 sec)
+
+mysql> DROP DATABASE IF EXISTS  myfirstdb; 
+Query OK, 1 row affected (0.01 sec)
+
+mysql> 
+mysql> CREATE DATABASE myfirstdb;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE myfirstdb;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE supplier (
+    ->    supplierID     SMALLINT UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+    ->    supplierName   VARCHAR(40) NOT NULL,
+    ->    phone          VARCHAR(14) NOT NULL,
+    ->    email          VARCHAR(60) NULL COMMENT "Could be empty",
+    ->    PRIMARY KEY (SupplierID)      # Every Record Must have a UNIQUE SupplierID
+    ->  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_myfirstdb |
++---------------------+
+| supplier            |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM supplier;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO supplier (supplierName, phone, email) 
+    ->       VALUE ("ABCSupplier","(313)112-2334","abc@dicforum.com"); 
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> INSERT INTO supplier (supplierName, phone, email)
+    ->      VALUES ("Jim's Parts","(555)746-9331","Jim.Habermasuse@rit.edu");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>      
+mysql> INSERT INTO supplier (supplierName, phone)
+    ->      VALUES ("Pet Supplier","(585)343-0055");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM supplier;
++------------+--------------+---------------+-------------------------+
+| supplierID | supplierName | phone         | email                   |
++------------+--------------+---------------+-------------------------+
+|      00001 | ABCSupplier  | (313)112-2334 | abc@dicforum.com        |
+|      00002 | Jim's Parts  | (555)746-9331 | Jim.Habermasuse@rit.edu |
+|      00003 | Pet Supplier | (585)343-0055 | NULL                    |
++------------+--------------+---------------+-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE supplier MODIFY column email VARCHAR(85);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC suppliers;
+ERROR 1146 (42S02): Table 'myfirstdb.suppliers' doesn't exist
+mysql> DESC supplier;
++--------------+-------------------------------+------+-----+---------+----------------+
+| Field        | Type                          | Null | Key | Default | Extra          |
++--------------+-------------------------------+------+-----+---------+----------------+
+| supplierID   | smallint(5) unsigned zerofill | NO   | PRI | NULL    | auto_increment |
+| supplierName | varchar(40)                   | NO   |     | NULL    |                |
+| phone        | varchar(14)                   | NO   |     | NULL    |                |
+| email        | varchar(85)                   | YES  |     | NULL    |                |
++--------------+-------------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM supplier;
++------------+--------------+---------------+-------------------------+
+| supplierID | supplierName | phone         | email                   |
++------------+--------------+---------------+-------------------------+
+|      00001 | ABCSupplier  | (313)112-2334 | abc@dicforum.com        |
+|      00002 | Jim's Parts  | (555)746-9331 | Jim.Habermasuse@rit.edu |
+|      00003 | Pet Supplier | (585)343-0055 | NULL                    |
++------------+--------------+---------------+-------------------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO supplier 
+    ->      values (10,"Paper Unlimited","(585)475-9999","Jim.Habermas@Paper_Unlimited.California.Malibu.office.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM supplier;
++------------+-----------------+---------------+-----------------------------------------------------------+
+| supplierID | supplierName    | phone         | email                                                     |
++------------+-----------------+---------------+-----------------------------------------------------------+
+|      00001 | ABCSupplier     | (313)112-2334 | abc@dicforum.com                                          |
+|      00002 | Jim's Parts     | (555)746-9331 | Jim.Habermasuse@rit.edu                                   |
+|      00003 | Pet Supplier    | (585)343-0055 | NULL                                                      |
+|      00010 | Paper Unlimited | (585)475-9999 | Jim.Habermas@Paper_Unlimited.California.Malibu.office.com |
++------------+-----------------+---------------+-----------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO supplier values (11,"Acme Corporation","(585)746-9999","sales@acme.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> 
+mysql> INSERT INTO supplier values (12,"Autozone","(313)453-4195",null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM supplier;
++------------+------------------+---------------+-----------------------------------------------------------+
+| supplierID | supplierName     | phone         | email                                                     |
++------------+------------------+---------------+-----------------------------------------------------------+
+|      00001 | ABCSupplier      | (313)112-2334 | abc@dicforum.com                                          |
+|      00002 | Jim's Parts      | (555)746-9331 | Jim.Habermasuse@rit.edu                                   |
+|      00003 | Pet Supplier     | (585)343-0055 | NULL                                                      |
+|      00010 | Paper Unlimited  | (585)475-9999 | Jim.Habermas@Paper_Unlimited.California.Malibu.office.com |
+|      00011 | Acme Corporation | (585)746-9999 | sales@acme.com                                            |
+|      00012 | Autozone         | (313)453-4195 | NULL                                                      |
++------------+------------------+---------------+-----------------------------------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM supplier;
++------------+------------------+---------------+-----------------------------------------------------------+
+| supplierID | supplierName     | phone         | email                                                     |
++------------+------------------+---------------+-----------------------------------------------------------+
+|      00001 | ABCSupplier      | (313)112-2334 | abc@dicforum.com                                          |
+|      00002 | Jim's Parts      | (555)746-9331 | Jim.Habermasuse@rit.edu                                   |
+|      00003 | Pet Supplier     | (585)343-0055 | NULL                                                      |
+|      00010 | Paper Unlimited  | (585)475-9999 | Jim.Habermas@Paper_Unlimited.California.Malibu.office.com |
+|      00011 | Acme Corporation | (585)746-9999 | sales@acme.com                                            |
+|      00012 | Autozone         | (313)453-4195 | NULL                                                      |
++------------+------------------+---------------+-----------------------------------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM supplier\G
+*************************** 1. row ***************************
+  supplierID: 00001
+supplierName: ABCSupplier
+       phone: (313)112-2334
+       email: abc@dicforum.com
+*************************** 2. row ***************************
+  supplierID: 00002
+supplierName: Jim's Parts
+       phone: (555)746-9331
+       email: Jim.Habermasuse@rit.edu
+*************************** 3. row ***************************
+  supplierID: 00003
+supplierName: Pet Supplier
+       phone: (585)343-0055
+       email: NULL
+*************************** 4. row ***************************
+  supplierID: 00010
+supplierName: Paper Unlimited
+       phone: (585)475-9999
+       email: Jim.Habermas@Paper_Unlimited.California.Malibu.office.com
+*************************** 5. row ***************************
+  supplierID: 00011
+supplierName: Acme Corporation
+       phone: (585)746-9999
+       email: sales@acme.com
+*************************** 6. row ***************************
+  supplierID: 00012
+supplierName: Autozone
+       phone: (313)453-4195
+       email: NULL
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM supplier WHERE supplierName like "A%";
++------------+------------------+---------------+------------------+
+| supplierID | supplierName     | phone         | email            |
++------------+------------------+---------------+------------------+
+|      00001 | ABCSupplier      | (313)112-2334 | abc@dicforum.com |
+|      00011 | Acme Corporation | (585)746-9999 | sales@acme.com   |
+|      00012 | Autozone         | (313)453-4195 | NULL             |
++------------+------------------+---------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> DROP DATABASE IF EXISTS  Titanic; 
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> 
+mysql> CREATE DATABASE Titanic;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE Titanic;
+Database changed
+mysql> 
+mysql> CREATE TABLE passenger (
+    ->    passengerID   SMALLINT UNSIGNED,
+    ->    survived      TINYINT UNSIGNED NOT NULL,
+    ->    pclass        TINYINT UNSIGNED NOT NULL,
+    ->    name          VARCHAR(260) DEFAULT NULL,
+    ->    sex           VARCHAR(6)   DEFAULT NULL,
+    ->    age           TINYINT UNSIGNED DEFAULT NULL,
+    ->    sibsp         TINYINT UNSIGNED DEFAULT 0,
+    ->    parch         TINYINT UNSIGNED DEFAULT 0,
+    ->    ticket        VARCHAR(50) DEFAULT NULL,
+    ->    fair          DECIMAL(16,4) DEFAULT 0,
+    ->    cabin         VARCHAR(30) DEFAULT NULL,
+    ->    embarked      CHAR(4),
+    ->    CONSTRAINT chk_embarked  CHECK (embarked in ("C" , "S", "Q",NULL)),  
+    ->    CONSTRAINT Titanic_passengerID_pk PRIMARY KEY (passengerID)
+    ->    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> 
+mysql> --
+mysql> -- Dumping data for table `passenger`
+mysql> --
+mysql> 
+mysql> LOCK TABLES `passenger` WRITE;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> /*!40000 ALTER TABLE `passenger` DISABLE KEYS */;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> INSERT INTO `passenger` VALUES (1,0,3,'Braund, Mr. Owen Harris','male',NULL,1,0,'A/5 21171',7.2500,' NULL','C\r'),(2,1,1,'Cumings, Mrs. John Bradley (Florence Briggs Thayer)','female',38,1,0,'PC 17599',71.2833,'C85','C\r'),(3,1,3,'Heikkinen, Miss. Laina','female',26,0,0,'STON/O2. 3101282',NULL,NULL,'S\r'),(4,1,1,'Futrelle, Mrs. Jacques Heath (Lily May Peel)','female',35,1,0,'113803',NULL,'C123','S\r'),(5,0,3,'Allen, Mr. William Henry','male',NULL,0,0,'373450',8.0500,NULL,'S\r'),(6,0,3,'Moran, Mr. James','male',NULL,0,0,'330877',8.4583,NULL,'Q\r'),(7,0,1,'McCarthy, Mr. Timothy J','male',54,0,0,'17463',51.8625,'E46','S\r'),(8,0,3,'Palsson, Master. Gosta Leonard','male',2,3,1,'349909',21.0750,NULL,'S\r'),(9,1,3,'Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)','female',27,0,2,'347742',11.1333,NULL,'S\r'),(10,1,2,'Nasser, Mrs. Nicholas (Adele Achem)','female',14,1,0,'237736',30.0708,NULL,'C\r'),(11,1,3,'Sandstrom, Miss. Marguerite Rut','female',NULL,1,1,'PP 9549',16.7000,'G6','S\r'),(12,1,1,'Bonnell, Miss. Elizabeth','female',58,0,0,'113783',26.5500,'C103','S\r'),(13,0,3,'Saundercock, Mr. William Henry','male',20,0,0,'A/5. 2151',8.0500,NULL,'S\r'),(14,0,3,'Andersson, Mr. Anders Johan','male',39,1,5,'347082',31.2750,NULL,'S\r'),(15,0,3,'Vestrom, Miss. Hulda Amanda Adolfina','female',14,0,0,'350406',7.8542,NULL,'S\r'),(16,1,2,'Hewlett, Mrs. (Mary D Kingcome) ','female',55,0,0,'248706',16.0000,NULL,'S\r'),(17,0,3,'Rice, Master. Eugene','male',2,4,1,'382652',29.1250,NULL,'Q\r'),(18,1,2,'Williams, Mr. Charles Eugene','male',NULL,0,0,'244373',13.0000,NULL,'S\r'),(19,0,3,'Vander Planke, Mrs. Julius (Emelia Maria Vandemoortele)','female',31,1,0,'345763',18.0000,NULL,'S\r'),(20,1,3,'Masselmani, Mrs. Fatima','female',NULL,0,0,'2649',7.2250,NULL,'C\r'),(21,0,2,'Fynney, Mr. Joseph J','male',35,0,0,'239865',26.0000,NULL,'S\r'),(22,1,2,'Beesley, Mr. Lawrence','male',34,0,0,'248698',13.0000,'D56','S\r'),(23,1,3,'McGowan, Miss. Anna \"Annie\"','female',15,0,0,'330923',8.0292,NULL,'Q\r'),(24,1,1,'Sloper, Mr. William Thompson','male',28,0,0,'113788',35.5000,'A6','S\r'),(25,0,3,'Palsson, Miss. Torborg Danira','female',8,3,1,'349909',21.0750,NULL,'S\r'),(26,1,3,'Asplund, Mrs. Carl Oscar (Selma Augusta Emilia Johansson)','female',38,1,5,'347077',31.3875,NULL,'S\r'),(27,0,3,'Emir, Mr. Farred Chehab','male',NULL,0,0,'2631',7.2250,NULL,'C\r'),(28,0,1,'Fortune, Mr. Charles Alexander','male',19,3,2,'19950',263.0000,'C23 C25 C27','S\r'),(29,1,3,'O\'Dwyer, Miss. Ellen \"Nellie\"','female',NULL,0,0,'330959',7.8792,NULL,'Q\r'),(30,0,3,'Todoroff, Mr. Lalio','male',NULL,0,0,'349216',7.8958,NULL,'S\r'),(31,0,1,'Uruchurtu, Don. Manuel E','male',40,0,0,'PC 17601',27.7208,NULL,'C\r'),(32,1,1,'Spencer, Mrs. William Augustus (Marie Eugenie)','female',NULL,1,0,'PC 17569',146.5208,'B78','C\r'),(33,1,3,'Glynn, Miss. Mary Agatha','female',NULL,0,0,'335677',7.7500,NULL,'Q\r'),(34,0,2,'Wheadon, Mr. Edward H','male',66,0,0,'C.A. 24579',10.5000,NULL,'S\r'),(35,0,1,'Meyer, Mr. Edgar Joseph','male',28,1,0,'PC 17604',82.1708,NULL,'C\r'),(36,0,1,'Holverson, Mr. Alexander Oskar','male',42,1,0,'113789',52.0000,NULL,'S\r'),(37,1,3,'Mamee, Mr. Hanna','male',NULL,0,0,'2677',7.2292,NULL,'C\r'),(38,0,3,'Cann, Mr. Ernest Charles','male',21,0,0,'A./5. 2152',8.0500,NULL,'S\r'),(39,0,3,'Vander Planke, Miss. Augusta Maria','female',18,2,0,'345764',18.0000,NULL,'S\r'),(40,1,3,'Nicola-Yarred, Miss. Jamila','female',14,1,0,'2651',11.2417,NULL,'C\r'),(41,0,3,'Ahlin, Mrs. Johan (Johanna Persdotter Larsson)','female',40,1,0,'7546',9.4750,NULL,'S\r'),(42,0,2,'Turpin, Mrs. William John Robert (Dorothy Ann Wonnacott)','female',27,1,0,'11668',21.0000,NULL,'S\r'),(43,0,3,'Kraeff, Mr. Theodor','male',NULL,0,0,'349253',7.8958,NULL,'C\r'),(44,1,2,'Laroche, Miss. Simonne Marie Anne Andree','female',3,1,2,'SC/Paris 2123',41.5792,NULL,'C\r'),(45,1,3,'Devaney, Miss. Margaret Delia','female',19,0,0,'330958',7.8792,NULL,'Q\r'),(46,0,3,'Rogers, Mr. William John','male',NULL,0,0,'S.C./A.4. 23567',8.0500,NULL,'S\r'),(47,0,3,'Lennon, Mr. Denis','male',NULL,1,0,'370371',15.5000,NULL,'Q\r'),(48,1,3,'O\'Driscoll, Miss. Bridget','female',NULL,0,0,'14311',7.7500,NULL,'Q\r'),(49,0,3,'Samaan, Mr. Youssef','male',NULL,2,0,'2662',21.6792,NULL,'C\r'),(50,0,3,'Arnold-Franchi, Mrs. Josef (Josefine Franchi)','female',18,1,0,'349237',17.8000,NULL,'S\r'),(51,0,3,'Panula, Master. Juha Niilo','male',7,4,1,'3101295',39.6875,NULL,'S\r'),(52,0,3,'Nosworthy, Mr. Richard Cater','male',21,0,0,'A/4. 39886',7.8000,NULL,'S\r'),(53,1,1,'Harper, Mrs. Henry Sleeper (Myna Haxtun)','female',49,1,0,'PC 17572',76.7292,'D33','C\r'),(54,1,2,'Faunthorpe, Mrs. Lizzie (Elizabeth Anne Wilkinson)','female',29,1,0,'2926',26.0000,NULL,'S\r'),(55,0,1,'Ostby, Mr. Engelhart Cornelius','male',65,0,1,'113509',61.9792,'B30','C\r'),(56,1,1,'Woolner, Mr. Hugh','male',NULL,0,0,'19947',35.5000,'C52','S\r'),(57,1,2,'Rugg, Miss. Emily','female',21,0,0,'C.A. 31026',10.5000,NULL,'S\r'),(58,0,3,'Novel, Mr. Mansouer','male',29,0,0,'2697',7.2292,NULL,'C\r'),(59,1,2,'West, Miss. Constance Mirium','female',5,1,2,'C.A. 34651',27.7500,NULL,'S\r'),(60,0,3,'Goodwin, Master. William Frederick','male',11,5,2,'CA 2144',46.9000,NULL,'S\r'),(61,0,3,'Sirayanian, Mr. Orsen','male',22,0,0,'2669',7.2292,NULL,'C\r'),(62,1,1,'Icard, Miss. Amelie','female',38,0,0,'113572',80.0000,'B28','NULL'),(63,0,1,'Harris, Mr. Henry Birkhardt','male',45,1,0,'36973',83.4750,'C83','S\r'),(64,0,3,'Skoog, Master. Harald','male',4,3,2,'347088',27.9000,NULL,'S\r'),(65,0,1,'Stewart, Mr. Albert A','male',NULL,0,0,'PC 17605',27.7208,NULL,'C\r'),(66,1,3,'Moubarek, Master. Gerios','male',NULL,1,1,'2661',15.2458,NULL,'C\r'),(67,1,2,'Nye, Mrs. (Elizabeth Ramell)','female',29,0,0,'C.A. 29395',10.5000,'F33','S\r'),(68,0,3,'Crease, Mr. Ernest James','male',19,0,0,'S.P. 3464',8.1583,NULL,'S\r'),(69,1,3,'Andersson, Miss. Erna Alexandra','female',17,4,2,'3101281',7.9250,NULL,'S\r'),(70,0,3,'Kink, Mr. Vincenz','male',26,2,0,'315151',8.6625,NULL,'S\r'),(71,0,2,'Jenkin, Mr. Stephen Curnow','male',32,0,0,'C.A. 33111',10.5000,NULL,'S\r'),(72,0,3,'Goodwin, Miss. Lillian Amy','female',16,5,2,'CA 2144',46.9000,NULL,'S\r'),(73,0,2,'Hood, Mr. Ambrose Jr','male',21,0,0,'S.O.C. 14879',73.5000,NULL,'S\r'),(74,0,3,'Chronopoulos, Mr. Apostolos','male',26,1,0,'2680',14.4542,NULL,'C\r'),(75,1,3,'Bing, Mr. Lee','male',32,0,0,'1601',56.4958,NULL,'S\r'),(76,0,3,'Moen, Mr. Sigurd Hansen','male',25,0,0,'348123',7.6500,'F G73','S\r'),(77,0,3,'Staneff, Mr. Ivan','male',NULL,0,0,'349208',7.8958,NULL,'S\r'),(78,0,3,'Moutal, Mr. Rahamin Haim','male',NULL,0,0,'374746',8.0500,NULL,'S\r'),(79,1,2,'Caldwell, Master. Alden Gates','male',1,0,2,'248738',29.0000,NULL,'S\r'),(80,1,3,'Dowdell, Miss. Elizabeth','female',30,0,0,'364516',12.4750,NULL,'S\r'),(81,0,3,'Waelens, Mr. Achille','male',22,0,0,'345767',9.0000,NULL,'S\r'),(82,1,3,'Sheerlinck, Mr. Jan Baptist','male',29,0,0,'345779',9.5000,NULL,'S\r'),(83,1,3,'McDermott, Miss. Brigdet Delia','female',NULL,0,0,'330932',7.7875,NULL,'Q\r'),(84,0,1,'Carrau, Mr. Francisco M','male',28,0,0,'113059',47.1000,NULL,'S\r'),(85,1,2,'Ilett, Miss. Bertha','female',17,0,0,'SO/C 14885',10.5000,NULL,'S\r'),(86,1,3,'Backstrom, Mrs. Karl Alfred (Maria Mathilda Gustafsson)','female',33,3,0,'3101278',15.8500,NULL,'S\r'),(87,0,3,'Ford, Mr. William Neal','male',16,1,3,'W./C. 6608',34.3750,NULL,'S\r'),(88,0,3,'Slocovski, Mr. Selman Francis','male',NULL,0,0,'SOTON/OQ 392086',8.0500,NULL,'S\r'),(89,1,1,'Fortune, Miss. Mabel Helen','female',23,3,2,'19950',263.0000,'C23 C25 C27','S\r'),(90,0,3,'Celotti, Mr. Francesco','male',24,0,0,'343275',8.0500,NULL,'S\r'),(91,0,3,'Christmann, Mr. Emil','male',29,0,0,'343276',8.0500,NULL,'S\r'),(92,0,3,'Andreasson, Mr. Paul Edvin','male',20,0,0,'347466',7.8542,NULL,'S\r'),(93,0,1,'Chaffee, Mr. Herbert Fuller','male',46,1,0,'W.E.P. 5734',61.1750,'E31','S\r'),(94,0,3,'Dean, Mr. Bertram Frank','male',26,1,2,'C.A. 2315',20.5750,NULL,'S\r'),(95,0,3,'Coxon, Mr. Daniel','male',59,0,0,'364500',7.2500,NULL,'S\r'),(96,0,3,'Shorney, Mr. Charles Joseph','male',NULL,0,0,'374910',8.0500,NULL,'S\r'),(97,0,1,'Goldschmidt, Mr. George B','male',71,0,0,'PC 17754',34.6542,'A5','C\r'),(98,1,1,'Greenfield, Mr. William Bertram','male',23,0,1,'PC 17759',63.3583,'D10 D12','C\r'),(99,1,2,'Doling, Mrs. John T (Ada Julia Bone)','female',34,0,1,'231919',23.0000,NULL,'S\r'),(100,0,2,'Kantor, Mr. Sinai','male',34,1,0,'244367',26.0000,NULL,'S\r'),(101,0,3,'Petranec, Miss. Matilda','female',28,0,0,'349245',7.8958,NULL,'S\r'),(102,0,3,'Petroff, Mr. Pastcho (\"Pentcho\")','male',NULL,0,0,'349215',7.8958,NULL,'S\r'),(103,0,1,'White, Mr. Richard Frasar','male',21,0,1,'35281',77.2875,'D26','S\r'),(104,0,3,'Johansson, Mr. Gustaf Joel','male',33,0,0,'7540',8.6542,NULL,'S\r'),(105,0,3,'Gustafsson, Mr. Anders Vilhelm','male',37,2,0,'3101276',7.9250,NULL,'S\r'),(106,0,3,'Mionoff, Mr. Stoytcho','male',28,0,0,'349207',7.8958,NULL,'S\r'),(107,1,3,'Salkjelsvik, Miss. Anna Kristine','female',21,0,0,'343120',7.6500,NULL,'S\r'),(108,1,3,'Moss, Mr. Albert Johan','male',NULL,0,0,'312991',7.7750,NULL,'S\r'),(109,0,3,'Rekic, Mr. Tido','male',38,0,0,'349249',7.8958,NULL,'S\r'),(110,1,3,'Moran, Miss. Bertha','female',NULL,1,0,'371110',24.1500,NULL,'Q\r'),(111,0,1,'Porter, Mr. Walter Chamberlain','male',47,0,0,'110465',52.0000,'C110','S\r'),(112,0,3,'Zabour, Miss. Hileni','female',15,1,0,'2665',14.4542,NULL,'C\r'),(113,0,3,'Barton, Mr. David John','male',22,0,0,'324669',8.0500,NULL,'S\r'),(114,0,3,'Jussila, Miss. Katriina','female',20,1,0,'4136',9.8250,NULL,'S\r'),(115,0,3,'Attalah, Miss. Malake','female',17,0,0,'2627',14.4583,NULL,'C\r'),(116,0,3,'Pekoniemi, Mr. Edvard','male',21,0,0,'STON/O 2. 3101294',7.9250,NULL,'S\r'),(117,0,3,'Connors, Mr. Patrick','male',71,0,0,'370369',7.7500,NULL,'Q\r'),(118,0,2,'Turpin, Mr. William John Robert','male',29,1,0,'11668',21.0000,NULL,'S\r'),(119,0,1,'Baxter, Mr. Quigg Edmond','male',24,0,1,'PC 17558',247.5208,'B58 B60','C\r'),(120,0,3,'Andersson, Miss. Ellis Anna Maria','female',2,4,2,'347082',31.2750,NULL,'S\r'),(121,0,2,'Hickman, Mr. Stanley George','male',21,2,0,'S.O.C. 14879',73.5000,NULL,'S\r'),(122,0,3,'Moore, Mr. Leonard Charles','male',NULL,0,0,'A4. 54510',8.0500,NULL,'S\r'),(123,0,2,'Nasser, Mr. Nicholas','male',33,1,0,'237736',30.0708,NULL,'C\r'),(124,1,2,'Webber, Miss. Susan','female',33,0,0,'27267',13.0000,'E101','S\r'),(125,0,1,'White, Mr. Percival Wayland','male',54,0,1,'35281',77.2875,'D26','S\r'),(126,1,3,'Nicola-Yarred, Master. Elias','male',12,1,0,'2651',11.2417,NULL,'C\r'),(127,0,3,'McMahon, Mr. Martin','male',NULL,0,0,'370372',7.7500,NULL,'Q\r'),(128,1,3,'Madsen, Mr. Fridtjof Arne','male',24,0,0,'C 17369',7.1417,NULL,'S\r'),(129,1,3,'Peter, Miss. Anna','female',NULL,1,1,'2668',22.3583,'F E69','C\r'),(130,0,3,'Ekstrom, Mr. Johan','male',45,0,0,'347061',6.9750,NULL,'S\r'),(131,0,3,'Drazenoic, Mr. Jozef','male',33,0,0,'349241',7.8958,NULL,'C\r'),(132,0,3,'Coelho, Mr. Domingos Fernandeo','male',20,0,0,'SOTON/O.Q. 3101307',7.0500,NULL,'S\r'),(133,0,3,'Robins, Mrs. Alexander A (Grace Charity Laury)','female',47,1,0,'A/5. 3337',14.5000,NULL,'S\r'),(134,1,2,'Weisz, Mrs. Leopold (Mathilde Francoise Pede)','female',29,1,0,'228414',26.0000,NULL,'S\r'),(135,0,2,'Sobey, Mr. Samuel James Hayden','male',25,0,0,'C.A. 29178',13.0000,NULL,'S\r'),(136,0,2,'Richard, Mr. Emile','male',23,0,0,'SC/PARIS 2133',15.0458,NULL,'C\r'),(137,1,1,'Newsom, Miss. Helen Monypeny','female',19,0,2,'11752',26.2833,'D47','S\r'),(138,0,1,'Futrelle, Mr. Jacques Heath','male',37,1,0,'113803',53.1000,'C123','S\r'),(139,0,3,'Osen, Mr. Olaf Elon','male',16,0,0,'7534',9.2167,NULL,'S\r'),(140,0,1,'Giglio, Mr. Victor','male',24,0,0,'PC 17593',79.2000,'B86','C\r'),(141,0,3,'Boulos, Mrs. Joseph (Sultana)','female',NULL,0,2,'2678',15.2458,NULL,'C\r'),(142,1,3,'Nysten, Miss. Anna Sofia','female',22,0,0,'347081',7.7500,NULL,'S\r'),(143,1,3,'Hakkarainen, Mrs. Pekka Pietari (Elin Matilda Dolck)','female',24,1,0,'STON/O2. 3101279',15.8500,NULL,'S\r'),(144,0,3,'Burke, Mr. Jeremiah','male',19,0,0,'365222',6.7500,NULL,'Q\r'),(145,0,2,'Andrew, Mr. Edgardo Samuel','male',18,0,0,'231945',11.5000,NULL,'S\r'),(146,0,2,'Nicholls, Mr. Joseph Charles','male',19,1,1,'C.A. 33112',36.7500,NULL,'S\r'),(147,1,3,'Andersson, Mr. August Edvard (\"Wennerstrom\")','male',27,0,0,'350043',7.7958,NULL,'S\r'),(148,0,3,'Ford, Miss. Robina Maggie \"Ruby\"','female',9,2,2,'W./C. 6608',34.3750,NULL,'S\r'),(149,0,2,'Navratil, Mr. Michel (\"Louis M Hoffman\")','male',37,0,2,'230080',26.0000,'F2','S\r'),(150,0,2,'Byles, Rev. Thomas Roussel Davids','male',42,0,0,'244310',13.0000,NULL,'S\r'),(151,0,2,'Bateman, Rev. Robert James','male',51,0,0,'S.O.P. 1166',12.5250,NULL,'S\r'),(152,1,1,'Pears, Mrs. Thomas (Edith Wearne)','female',22,1,0,'113776',66.6000,'C2','S\r'),(153,0,3,'Meo, Mr. Alfonzo','male',56,0,0,'A.5. 11206',8.0500,NULL,'S\r'),(154,0,3,'van Billiard, Mr. Austin Blyler','male',41,0,2,'A/5. 851',14.5000,NULL,'S\r'),(155,0,3,'Olsen, Mr. Ole Martin','male',NULL,0,0,'Fa 265302',7.3125,NULL,'S\r'),(156,0,1,'Williams, Mr. Charles Duane','male',51,0,1,'PC 17597',61.3792,NULL,'C\r'),(157,1,3,'Gilnagh, Miss. Katherine \"Katie\"','female',16,0,0,'35851',7.7333,NULL,'Q\r'),(158,0,3,'Corn, Mr. Harry','male',30,0,0,'SOTON/OQ 392090',8.0500,NULL,'S\r'),(159,0,3,'Smiljanic, Mr. Mile','male',NULL,0,0,'315037',8.6625,NULL,'S\r'),(160,0,3,'Sage, Master. Thomas Henry','male',NULL,8,2,'CA. 2343',69.5500,NULL,'S\r'),(161,0,3,'Cribb, Mr. John Hatfield','male',44,0,1,'371362',16.1000,NULL,'S\r'),(162,1,2,'Watt, Mrs. James (Elizabeth \"Bessie\" Inglis Milne)','female',40,0,0,'C.A. 33595',15.7500,NULL,'S\r'),(163,0,3,'Bengtsson, Mr. John Viktor','male',26,0,0,'347068',7.7750,NULL,'S\r'),(164,0,3,'Calic, Mr. Jovo','male',17,0,0,'315093',8.6625,NULL,'S\r'),(165,0,3,'Panula, Master. Eino Viljami','male',1,4,1,'3101295',39.6875,NULL,'S\r'),(166,1,3,'Goldsmith, Master. Frank John William \"Frankie\"','male',9,0,2,'363291',20.5250,NULL,'S\r'),(167,1,1,'Chibnall, Mrs. (Edith Martha Bowerman)','female',NULL,0,1,'113505',55.0000,'E33','S\r'),(168,0,3,'Skoog, Mrs. William (Anna Bernhardina Karlsson)','female',45,1,4,'347088',27.9000,NULL,'S\r'),(169,0,1,'Baumann, Mr. John D','male',NULL,0,0,'PC 17318',25.9250,NULL,'S\r'),(170,0,3,'Ling, Mr. Lee','male',28,0,0,'1601',56.4958,NULL,'S\r'),(171,0,1,'Van der hoef, Mr. Wyckoff','male',61,0,0,'111240',33.5000,'B19','S\r'),(172,0,3,'Rice, Master. Arthur','male',4,4,1,'382652',29.1250,NULL,'Q\r'),(173,1,3,'Johnson, Miss. Eleanor Ileen','female',1,1,1,'347742',11.1333,NULL,'S\r'),(174,0,3,'Sivola, Mr. Antti Wilhelm','male',21,0,0,'STON/O 2. 3101280',7.9250,NULL,'S\r'),(175,0,1,'Smith, Mr. James Clinch','male',56,0,0,'17764',30.6958,'A7','C\r'),(176,0,3,'Klasen, Mr. Klas Albin','male',18,1,1,'350404',7.8542,NULL,'S\r'),(177,0,3,'Lefebre, Master. Henry Forbes','male',NULL,3,1,'4133',25.4667,NULL,'S\r'),(178,0,1,'Isham, Miss. Ann Elizabeth','female',50,0,0,'PC 17595',28.7125,'C49','C\r'),(179,0,2,'Hale, Mr. Reginald','male',30,0,0,'250653',13.0000,NULL,'S\r'),(180,0,3,'Leonard, Mr. Lionel','male',36,0,0,'LINE',0.0000,NULL,'S\r'),(181,0,3,'Sage, Miss. Constance Gladys','female',NULL,8,2,'CA. 2343',69.5500,NULL,'S\r'),(182,0,2,'Pernot, Mr. Rene','male',NULL,0,0,'SC/PARIS 2131',15.0500,NULL,'C\r'),(183,0,3,'Asplund, Master. Clarence Gustaf Hugo','male',9,4,2,'347077',31.3875,NULL,'S\r'),(184,1,2,'Becker, Master. Richard F','male',1,2,1,'230136',39.0000,'F4','S\r'),(185,1,3,'Kink-Heilmann, Miss. Luise Gretchen','female',4,0,2,'315153',22.0250,NULL,'S\r'),(186,0,1,'Rood, Mr. Hugh Roscoe','male',NULL,0,0,'113767',50.0000,'A32','S\r'),(187,1,3,'O\'Brien, Mrs. Thomas (Johanna \"Hannah\" Godfrey)','female',NULL,1,0,'370365',15.5000,NULL,'Q\r'),(188,1,1,'Romaine, Mr. Charles Hallace (\"Mr C Rolmane\")','male',45,0,0,'111428',26.5500,NULL,'S\r'),(189,0,3,'Bourke, Mr. John','male',40,1,1,'364849',15.5000,NULL,'Q\r'),(190,0,3,'Turcin, Mr. Stjepan','male',36,0,0,'349247',7.8958,NULL,'S\r'),(191,1,2,'Pinsky, Mrs. (Rosa)','female',32,0,0,'234604',13.0000,NULL,'S\r'),(192,0,2,'Carbines, Mr. William','male',19,0,0,'28424',13.0000,NULL,'S\r'),(193,1,3,'Andersen-Jensen, Miss. Carla Christine Nielsine','female',19,1,0,'350046',7.8542,NULL,'S\r'),(194,1,2,'Navratil, Master. Michel M','male',3,1,1,'230080',26.0000,'F2','S\r'),(195,1,1,'Brown, Mrs. James Joseph (Margaret Tobin)','female',44,0,0,'PC 17610',27.7208,'B4','C\r'),(196,1,1,'Lurette, Miss. Elise','female',58,0,0,'PC 17569',146.5208,'B80','C\r'),(197,0,3,'Mernagh, Mr. Robert','male',NULL,0,0,'368703',7.7500,NULL,'Q\r'),(198,0,3,'Olsen, Mr. Karl Siegwart Andreas','male',42,0,1,'4579',8.4042,NULL,'S\r'),(199,1,3,'Madigan, Miss. Margaret \"Maggie\"','female',NULL,0,0,'370370',7.7500,NULL,'Q\r'),(200,0,2,'Yrois, Miss. Henriette (\"Mrs Harbeck\")','female',24,0,0,'248747',13.0000,NULL,'S\r'),(201,0,3,'Vande Walle, Mr. Nestor Cyriel','male',28,0,0,'345770',9.5000,NULL,'S\r'),(202,0,3,'Sage, Mr. Frederick','male',NULL,8,2,'CA. 2343',69.5500,NULL,'S\r'),(203,0,3,'Johanson, Mr. Jakob Alfred','male',34,0,0,'3101264',6.4958,NULL,'S\r'),(204,0,3,'Youseff, Mr. Gerious','male',46,0,0,'2628',7.2250,NULL,'C\r'),(205,1,3,'Cohen, Mr. Gurshon \"Gus\"','male',18,0,0,'A/5 3540',8.0500,NULL,'S\r'),(206,0,3,'Strom, Miss. Telma Matilda','female',2,0,1,'347054',10.4625,'G6','S\r'),(207,0,3,'Backstrom, Mr. Karl Alfred','male',32,1,0,'3101278',15.8500,NULL,'S\r'),(208,1,3,'Albimona, Mr. Nassef Cassem','male',26,0,0,'2699',18.7875,NULL,'C\r'),(209,1,3,'Carr, Miss. Helen \"Ellen\"','female',16,0,0,'367231',7.7500,NULL,'Q\r'),(210,1,1,'Blank, Mr. Henry','male',40,0,0,'112277',31.0000,'A31','C\r'),(211,0,3,'Ali, Mr. Ahmed','male',24,0,0,'SOTON/O.Q. 3101311',7.0500,NULL,'S\r'),(212,1,2,'Cameron, Miss. Clear Annie','female',35,0,0,'F.C.C. 13528',21.0000,NULL,'S\r'),(213,0,3,'Perkin, Mr. John Henry','male',22,0,0,'A/5 21174',7.2500,NULL,'S\r'),(214,0,2,'Givard, Mr. Hans Kristensen','male',30,0,0,'250646',13.0000,NULL,'S\r'),(215,0,3,'Kiernan, Mr. Philip','male',NULL,1,0,'367229',7.7500,NULL,'Q\r'),(216,1,1,'Newell, Miss. Madeleine','female',31,1,0,'35273',113.2750,'D36','C\r'),(217,1,3,'Honkanen, Miss. Eliina','female',27,0,0,'STON/O2. 3101283',7.9250,NULL,'S\r'),(218,0,2,'Jacobsohn, Mr. Sidney Samuel','male',42,1,0,'243847',27.0000,NULL,'S\r'),(219,1,1,'Bazzani, Miss. Albina','female',32,0,0,'11813',76.2917,'D15','C\r'),(220,0,2,'Harris, Mr. Walter','male',30,0,0,'W/C 14208',10.5000,NULL,'S\r'),(221,1,3,'Sunderland, Mr. Victor Francis','male',16,0,0,'SOTON/OQ 392089',8.0500,NULL,'S\r'),(222,0,2,'Bracken, Mr. James H','male',27,0,0,'220367',13.0000,NULL,'S\r'),(223,0,3,'Green, Mr. George Henry','male',51,0,0,'21440',8.0500,NULL,'S\r'),(224,0,3,'Nenkoff, Mr. Christo','male',NULL,0,0,'349234',7.8958,NULL,'S\r'),(225,1,1,'Hoyt, Mr. Frederick Maxfield','male',38,1,0,'19943',90.0000,'C93','S\r'),(226,0,3,'Berglund, Mr. Karl Ivar Sven','male',22,0,0,'PP 4348',9.3500,NULL,'S\r'),(227,1,2,'Mellors, Mr. William John','male',19,0,0,'SW/PP 751',10.5000,NULL,'S\r'),(228,0,3,'Lovell, Mr. John Hall (\"Henry\")','male',21,0,0,'A/5 21173',7.2500,NULL,'S\r'),(229,0,2,'Fahlstrom, Mr. Arne Jonas','male',18,0,0,'236171',13.0000,NULL,'S\r'),(230,0,3,'Lefebre, Miss. Mathilde','female',NULL,3,1,'4133',25.4667,NULL,'S\r'),(231,1,1,'Harris, Mrs. Henry Birkhardt (Irene Wallach)','female',35,1,0,'36973',83.4750,'C83','S\r'),(232,0,3,'Larsson, Mr. Bengt Edvin','male',29,0,0,'347067',7.7750,NULL,'S\r'),(233,0,2,'Sjostedt, Mr. Ernst Adolf','male',59,0,0,'237442',13.5000,NULL,'S\r'),(234,1,3,'Asplund, Miss. Lillian Gertrud','female',5,4,2,'347077',31.3875,NULL,'S\r'),(235,0,2,'Leyson, Mr. Robert William Norman','male',24,0,0,'C.A. 29566',10.5000,NULL,'S\r'),(236,0,3,'Harknett, Miss. Alice Phoebe','female',NULL,0,0,'W./C. 6609',7.5500,NULL,'S\r'),(237,0,2,'Hold, Mr. Stephen','male',44,1,0,'26707',26.0000,NULL,'S\r'),(238,1,2,'Collyer, Miss. Marjorie \"Lottie\"','female',8,0,2,'C.A. 31921',26.2500,NULL,'S\r'),(239,0,2,'Pengelly, Mr. Frederick William','male',19,0,0,'28665',10.5000,NULL,'S\r'),(240,0,2,'Hunt, Mr. George Henry','male',33,0,0,'SCO/W 1585',12.2750,NULL,'S\r'),(241,0,3,'Zabour, Miss. Thamine','female',NULL,1,0,'2665',14.4542,NULL,'C\r'),(242,1,3,'Murphy, Miss. Katherine \"Kate\"','female',NULL,1,0,'367230',15.5000,NULL,'Q\r'),(243,0,2,'Coleridge, Mr. Reginald Charles','male',29,0,0,'W./C. 14263',10.5000,NULL,'S\r'),(244,0,3,'Maenpaa, Mr. Matti Alexanteri','male',22,0,0,'STON/O 2. 3101275',7.1250,NULL,'S\r'),(245,0,3,'Attalah, Mr. Sleiman','male',30,0,0,'2694',7.2250,NULL,'C\r'),(246,0,1,'Minahan, Dr. William Edward','male',44,2,0,'19928',90.0000,'C78','Q\r'),(247,0,3,'Lindahl, Miss. Agda Thorilda Viktoria','female',25,0,0,'347071',7.7750,NULL,'S\r'),(248,1,2,'Hamalainen, Mrs. William (Anna)','female',24,0,2,'250649',14.5000,NULL,'S\r'),(249,1,1,'Beckwith, Mr. Richard Leonard','male',37,1,1,'11751',52.5542,'D35','S\r'),(250,0,2,'Carter, Rev. Ernest Courtenay','male',54,1,0,'244252',26.0000,NULL,'S\r'),(251,0,3,'Reed, Mr. James George','male',NULL,0,0,'362316',7.2500,NULL,'S\r'),(252,0,3,'Strom, Mrs. Wilhelm (Elna Matilda Persson)','female',29,1,1,'347054',10.4625,'G6','S\r'),(253,0,1,'Stead, Mr. William Thomas','male',62,0,0,'113514',26.5500,'C87','S\r'),(254,0,3,'Lobb, Mr. William Arthur','male',30,1,0,'A/5. 3336',16.1000,NULL,'S\r'),(255,0,3,'Rosblom, Mrs. Viktor (Helena Wilhelmina)','female',41,0,2,'370129',20.2125,NULL,'S\r'),(256,1,3,'Touma, Mrs. Darwis (Hanne Youssef Razi)','female',29,0,2,'2650',15.2458,NULL,'C\r'),(257,1,1,'Thorne, Mrs. Gertrude Maybelle','female',NULL,0,0,'PC 17585',79.2000,NULL,'C\r'),(258,1,1,'Cherry, Miss. Gladys','female',30,0,0,'110152',86.5000,'B77','S\r'),(259,1,1,'Ward, Miss. Anna','female',35,0,0,'PC 17755',512.3292,NULL,'C\r'),(260,1,2,'Parrish, Mrs. (Lutie Davis)','female',50,0,1,'230433',26.0000,NULL,'S\r'),(261,0,3,'Smith, Mr. Thomas','male',NULL,0,0,'384461',7.7500,NULL,'Q\r'),(262,1,3,'Asplund, Master. Edvin Rojj Felix','male',3,4,2,'347077',31.3875,NULL,'S\r'),(263,0,1,'Taussig, Mr. Emil','male',52,1,1,'110413',79.6500,'E67','S\r'),(264,0,1,'Harrison, Mr. William','male',40,0,0,'112059',0.0000,'B94','S\r'),(265,0,3,'Henry, Miss. Delia','female',NULL,0,0,'382649',7.7500,NULL,'Q\r'),(266,0,2,'Reeves, Mr. David','male',36,0,0,'C.A. 17248',10.5000,NULL,'S\r'),(267,0,3,'Panula, Mr. Ernesti Arvid','male',16,4,1,'3101295',39.6875,NULL,'S\r'),(268,1,3,'Persson, Mr. Ernst Ulrik','male',25,1,0,'347083',7.7750,NULL,'S\r'),(269,1,1,'Graham, Mrs. William Thompson (Edith Junkins)','female',58,0,1,'PC 17582',153.4625,'C125','S\r'),(270,1,1,'Bissette, Miss. Amelia','female',35,0,0,'PC 17760',135.6333,'C99','S\r'),(271,0,1,'Cairns, Mr. Alexander','male',NULL,0,0,'113798',31.0000,NULL,'S\r'),(272,1,3,'Tornquist, Mr. William Henry','male',25,0,0,'LINE',0.0000,NULL,'S\r'),(273,1,2,'Mellinger, Mrs. (Elizabeth Anne Maidment)','female',41,0,1,'250644',19.5000,NULL,'S\r'),(274,0,1,'Natsch, Mr. Charles H','male',37,0,1,'PC 17596',29.7000,'C118','C\r'),(275,1,3,'Healy, Miss. Hanora \"Nora\"','female',NULL,0,0,'370375',7.7500,NULL,'Q\r'),(276,1,1,'Andrews, Miss. Kornelia Theodosia','female',63,1,0,'13502',77.9583,'D7','S\r'),(277,0,3,'Lindblom, Miss. Augusta Charlotta','female',45,0,0,'347073',7.7500,NULL,'S\r'),(278,0,2,'Parkes, Mr. Francis \"Frank\"','male',NULL,0,0,'239853',0.0000,NULL,'S\r'),(279,0,3,'Rice, Master. Eric','male',7,4,1,'382652',29.1250,NULL,'Q\r'),(280,1,3,'Abbott, Mrs. Stanton (Rosa Hunt)','female',35,1,1,'C.A. 2673',20.2500,NULL,'S\r'),(281,0,3,'Duane, Mr. Frank','male',65,0,0,'336439',7.7500,NULL,'Q\r'),(282,0,3,'Olsson, Mr. Nils Johan Goransson','male',28,0,0,'347464',7.8542,NULL,'S\r'),(283,0,3,'de Pelsmaeker, Mr. Alfons','male',16,0,0,'345778',9.5000,NULL,'S\r'),(284,1,3,'Dorking, Mr. Edward Arthur','male',19,0,0,'A/5. 10482',8.0500,NULL,'S\r'),(285,0,1,'Smith, Mr. Richard William','male',NULL,0,0,'113056',26.0000,'A19','S\r'),(286,0,3,'Stankovic, Mr. Ivan','male',33,0,0,'349239',8.6625,NULL,'C\r'),(287,1,3,'de Mulder, Mr. Theodore','male',30,0,0,'345774',9.5000,NULL,'S\r'),(288,0,3,'Naidenoff, Mr. Penko','male',22,0,0,'349206',7.8958,NULL,'S\r'),(289,1,2,'Hosono, Mr. Masabumi','male',42,0,0,'237798',13.0000,NULL,'S\r'),(290,1,3,'Connolly, Miss. Kate','female',22,0,0,'370373',7.7500,NULL,'Q\r'),(291,1,1,'Barber, Miss. Ellen \"Nellie\"','female',26,0,0,'19877',78.8500,NULL,'S\r'),(292,1,1,'Bishop, Mrs. Dickinson H (Helen Walton)','female',19,1,0,'11967',91.0792,'B49','C\r'),(293,0,2,'Levy, Mr. Rene Jacques','male',36,0,0,'SC/Paris 2163',12.8750,'D','C\r'),(294,0,3,'Haas, Miss
+    '> ^C
+mysql> DROP DATABASE IF EXISTS  Titanic; 
+ERROR 1192 (HY000): Can't execute the given command because you have active locked tables or an active transaction
+mysql> 
+mysql> CREATE DATABASE Titanic;
+ERROR 1192 (HY000): Can't execute the given command because you have active locked tables or an active transaction
+mysql> USE Titanic;
+Database changed
+mysql> 
+mysql> CREATE TABLE passenger (
+    ->    passengerID   SMALLINT UNSIGNED,
+    ->    survived      TINYINT UNSIGNED NOT NULL,
+    ->    pclass        TINYINT UNSIGNED NOT NULL,
+    ->    name          VARCHAR(260) DEFAULT NULL,
+    ->    sex           VARCHAR(6)   DEFAULT NULL,
+    ->    age           TINYINT UNSIGNED DEFAULT NULL,
+    ->    sibsp         TINYINT UNSIGNED DEFAULT 0,
+    ->    parch         TINYINT UNSIGNED DEFAULT 0,
+    ->    ticket        VARCHAR(50) DEFAULT NULL,
+    ->    fair          DECIMAL(16,4) DEFAULT 0,
+    ->    cabin         VARCHAR(30) DEFAULT NULL,
+    ->    embarked      CHAR(4),
+    ->    CONSTRAINT chk_embarked  CHECK (embarked in ("C" , "S", "Q",NULL)),  
+    ->    CONSTRAINT Titanic_passengerID_pk PRIMARY KEY (passengerID)
+    ->    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ERROR 1050 (42S01): Table 'passenger' already exists
+mysql> UNLOCK TABLES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DROP DATABASE IF EXISTS  Titanic; 
+Query OK, 1 row affected (0.02 sec)
+
+mysql> 
+mysql> CREATE DATABASE Titanic;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE Titanic;
+Database changed
+mysql> 
+mysql> CREATE TABLE passenger (
+    ->    passengerID   SMALLINT UNSIGNED,
+    ->    survived      TINYINT UNSIGNED NOT NULL,
+    ->    pclass        TINYINT UNSIGNED NOT NULL,
+    ->    name          VARCHAR(260) DEFAULT NULL,
+    ->    sex           VARCHAR(6)   DEFAULT NULL,
+    ->    age           TINYINT UNSIGNED DEFAULT NULL,
+    ->    sibsp         TINYINT UNSIGNED DEFAULT 0,
+    ->    parch         TINYINT UNSIGNED DEFAULT 0,
+    ->    ticket        VARCHAR(50) DEFAULT NULL,
+    ->    fair          DECIMAL(16,4) DEFAULT 0,
+    ->    cabin         VARCHAR(30) DEFAULT NULL,
+    ->    embarked      CHAR(4),
+    ->    CONSTRAINT chk_embarked  CHECK (embarked in ("C" , "S", "Q",NULL)),  
+    ->    CONSTRAINT Titanic_passengerID_pk PRIMARY KEY (passengerID)
+    ->    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> \. C:\Users\Andrew Apollo\ISTE230\sourcefiles\Titanic2.sql
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 891 rows affected (0.01 sec)
+Records: 891  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
++-------------+---------------------------------------------------------+----------+---------+
+| passengerID | name                                                    | survived | fair    |
++-------------+---------------------------------------------------------+----------+---------+
+|           1 | Braund, Mr. Owen Harris                                 |        0 |  7.2500 |
+|           2 | Cumings, Mrs. John Bradley (Florence Briggs Thayer)     |        1 | 71.2833 |
+|           3 | Heikkinen, Miss. Laina                                  |        1 |    NULL |
+|           4 | Futrelle, Mrs. Jacques Heath (Lily May Peel)            |        1 |    NULL |
+|           5 | Allen, Mr. William Henry                                |        0 |  8.0500 |
+|           6 | Moran, Mr. James                                        |        0 |  8.4583 |
+|           7 | McCarthy, Mr. Timothy J                                 |        0 | 51.8625 |
+|           8 | Palsson, Master. Gosta Leonard                          |        0 | 21.0750 |
+|           9 | Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)       |        1 | 11.1333 |
+|          10 | Nasser, Mrs. Nicholas (Adele Achem)                     |        1 | 30.0708 |
+|          11 | Sandstrom, Miss. Marguerite Rut                         |        1 | 16.7000 |
+|          12 | Bonnell, Miss. Elizabeth                                |        1 | 26.5500 |
+|          13 | Saundercock, Mr. William Henry                          |        0 |  8.0500 |
+|          14 | Andersson, Mr. Anders Johan                             |        0 | 31.2750 |
+|          15 | Vestrom, Miss. Hulda Amanda Adolfina                    |        0 |  7.8542 |
+|          16 | Hewlett, Mrs. (Mary D Kingcome)                         |        1 | 16.0000 |
+|          17 | Rice, Master. Eugene                                    |        0 | 29.1250 |
+|          18 | Williams, Mr. Charles Eugene                            |        1 | 13.0000 |
+|          19 | Vander Planke, Mrs. Julius (Emelia Maria Vandemoortele) |        0 | 18.0000 |
+|          20 | Masselmani, Mrs. Fatima                                 |        1 |  7.2250 |
+|          21 | Fynney, Mr. Joseph J                                    |        0 | 26.0000 |
+|          22 | Beesley, Mr. Lawrence                                   |        1 | 13.0000 |
+|          23 | McGowan, Miss. Anna "Annie"                             |        1 |  8.0292 |
+|          24 | Sloper, Mr. William Thompson                            |        1 | 35.5000 |
+|          25 | Palsson, Miss. Torborg Danira                           |        0 | 21.0750 |
++-------------+---------------------------------------------------------+----------+---------+
+25 rows in set (0.00 sec)
+
++-------------+------------------------------------------------------------------------------------+----------+----------+
+| passengerID | name                                                                               | fair     | survived |
++-------------+------------------------------------------------------------------------------------+----------+----------+
+|         680 | Cardeza, Mr. Thomas Drake Martinez                                                 | 512.3292 |        1 |
+|         738 | Lesurer, Mr. Gustave J                                                             | 512.3292 |        1 |
+|         259 | Ward, Miss. Anna                                                                   | 512.3292 |        1 |
+|         342 | Fortune, Miss. Alice Elizabeth                                                     | 263.0000 |        1 |
+|          89 | Fortune, Miss. Mabel Helen                                                         | 263.0000 |        1 |
+|         439 | Fortune, Mr. Mark                                                                  | 263.0000 |        0 |
+|          28 | Fortune, Mr. Charles Alexander                                                     | 263.0000 |        0 |
+|         743 | Ryerson, Miss. Susan Parker "Suzette"                                              | 262.3750 |        1 |
+|         312 | Ryerson, Miss. Emily Borie                                                         | 262.3750 |        1 |
+|         300 | Baxter, Mrs. James (Helene DeLaudeniere Chaput)                                    | 247.5208 |        1 |
+|         119 | Baxter, Mr. Quigg Edmond                                                           | 247.5208 |        0 |
+|         717 | Endres, Miss. Caroline Louise                                                      | 227.5250 |        1 |
+|         558 | Robbins, Mr. Victor                                                                | 227.5250 |        0 |
+|         701 | Astor, Mrs. John Jacob (Madeleine Talmadge Force)                                  | 227.5250 |        1 |
+|         381 | Bidois, Miss. Rosalie                                                              | 227.5250 |        1 |
+|         528 | Farthing, Mr. John                                                                 | 221.7792 |        0 |
+|         378 | Widener, Mr. Harry Elkins                                                          | 211.5000 |        0 |
+|         780 | Robert, Mrs. Edward Scott (Elisabeth Walton McMillan)                              | 211.3375 |        1 |
+|         690 | Madill, Miss. Georgette Alexandra                                                  | 211.3375 |        1 |
+|         731 | Allen, Miss. Elisabeth Walton                                                      | 211.3375 |        1 |
+|         857 | Wick, Mrs. George Dennick (Mary Hitchcock)                                         | 164.8667 |        1 |
+|         319 | Wick, Miss. Mary Natalie                                                           | 164.8667 |        1 |
+|         610 | Shutes, Miss. Elizabeth W                                                          | 153.4625 |        1 |
+|         269 | Graham, Mrs. William Thompson (Edith Junkins)                                      | 153.4625 |        1 |
+|         333 | Graham, Mr. George Edward                                                          | 153.4625 |        0 |
+|         298 | Allison, Miss. Helen Loraine                                                       | 151.5500 |        0 |
+|         306 | Allison, Master. Hudson Trevor                                                     | 151.5500 |        1 |
+|         709 | Cleaver, Miss. Alice                                                               | 151.5500 |        1 |
+|         499 | Allison, Mrs. Hudson J C (Bessie Waldo Daniels)                                    | 151.5500 |        0 |
+|         196 | Lurette, Miss. Elise                                                               | 146.5208 |        1 |
+|          32 | Spencer, Mrs. William Augustus (Marie Eugenie)                                     | 146.5208 |        1 |
+|         270 | Bissette, Miss. Amelia                                                             | 135.6333 |        1 |
+|         326 | Young, Miss. Marie Grice                                                           | 135.6333 |        1 |
+|         374 | Ringhini, Mr. Sante                                                                | 135.6333 |        0 |
+|         320 | Spedden, Mrs. Frederic Oakley (Margaretta Corning Stone)                           | 134.5000 |        1 |
+|         338 | Burns, Miss. Elizabeth Margaret                                                    | 134.5000 |        1 |
+|         335 | Frauenthal, Mrs. Henry William (Clara Heinsheimer)                                 | 133.6500 |        1 |
+|         661 | Frauenthal, Dr. Henry William                                                      | 133.6500 |        1 |
+|         803 | Carter, Master. William Thornton II                                                | 120.0000 |        1 |
+|         436 | Carter, Miss. Lucile Polk                                                          | 120.0000 |        1 |
+|         764 | Carter, Mrs. William Ernest (Lucile Polk)                                          | 120.0000 |        1 |
+|         391 | Carter, Mr. William Ernest                                                         | 120.0000 |        1 |
+|         216 | Newell, Miss. Madeleine                                                            | 113.2750 |        1 |
+|         394 | Newell, Miss. Marjorie                                                             | 113.2750 |        1 |
+|         660 | Newell, Mr. Arthur Webster                                                         | 113.2750 |        0 |
+|         582 | Thayer, Mrs. John Borland (Marian Longstreth Morris)                               | 110.8833 |        1 |
+|         699 | Thayer, Mr. John Borland                                                           | 110.8833 |        0 |
+|         307 | Fleming, Miss. Margaret                                                            | 110.8833 |        1 |
+|         551 | Thayer, Mr. John Borland Jr                                                        | 110.8833 |        1 |
+|         308 | Penasco y Castellana, Mrs. Victor de Satode (Maria Josefa Perez de Soto y Vallejo) | 108.9000 |        1 |
+|         506 | Penasco y Castellana, Mr. Victor de Satode                                         | 108.9000 |        0 |
+|         545 | Douglas, Mr. Walter Donald                                                         | 106.4250 |        0 |
+|         538 | LeRoy, Miss. Bertha                                                                | 106.4250 |        1 |
+|         821 | Hays, Mrs. Charles Melville (Clara Jennings Gregg)                                 |  93.5000 |        1 |
+|         521 | Perreault, Miss. Anne                                                              |  93.5000 |        1 |
+|         485 | Bishop, Mr. Dickinson H                                                            |  91.0792 |        1 |
+|         292 | Bishop, Mrs. Dickinson H (Helen Walton)                                            |  91.0792 |        1 |
+|         487 | Hoyt, Mrs. Frederick Maxfield (Jane Anne Forby)                                    |  90.0000 |        1 |
+|         413 | Minahan, Miss. Daisy E                                                             |  90.0000 |        1 |
+|         246 | Minahan, Dr. William Edward                                                        |  90.0000 |        0 |
+|         225 | Hoyt, Mr. Frederick Maxfield                                                       |  90.0000 |        1 |
+|         454 | Goldenberg, Mr. Samuel L                                                           |  89.1042 |        1 |
+|         850 | Goldenberg, Mrs. Samuel L (Edwiga Grabowska)                                       |  89.1042 |        1 |
+|         760 | Rothes, the Countess. of (Lucy Noel Martha Dyer-Edwards)                           |  86.5000 |        1 |
+|         258 | Cherry, Miss. Gladys                                                               |  86.5000 |        1 |
+|         505 | Maioni, Miss. Roberta                                                              |  86.5000 |        1 |
+|          63 | Harris, Mr. Henry Birkhardt                                                        |  83.4750 |        0 |
+|         231 | Harris, Mrs. Henry Birkhardt (Irene Wallach)                                       |  83.4750 |        1 |
+|         880 | Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)                                      |  83.1583 |        1 |
+|         836 | Compton, Miss. Sara Rebecca                                                        |  83.1583 |        1 |
++-------------+------------------------------------------------------------------------------------+----------+----------+
+70 rows in set (0.00 sec)
+
++-------------+
+| avg(fair)   |
++-------------+
+| 48.50060118 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> notee

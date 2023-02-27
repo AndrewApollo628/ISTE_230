@@ -1,0 +1,56 @@
+-- Updated 07/10/2020
+-- Inserts record into contactInfo
+-- Please notice not every attribute/field listed has a value
+-- Qty of attribute names is 8
+-- Qty of values is 7
+
+INSERT INTO contact_info
+(contactID,
+firstName,
+middleInitial,
+lastName,
+email,
+url,
+birthday,
+notes)
+VALUES
+(1,
+'David',
+'C',
+'Munson',
+'munson@rit.edu',
+'http://www.rit.edu/president',
+NULL,
+'Started as President of RIT on July 1, 2017.'),
+(2,
+'James',
+'R',
+'Habermas',
+'Jim.Habermas@rit.edu',
+'http://www.rit.edu/',
+'1962-04-28',
+'Wife: Dawn Kids: Brittany, Brandon.'),
+(3,
+'Ely',
+'T',
+'Walloby',
+'etwalloby@concor.com',
+'http://www.concor.com/~walloby',
+'1956-03-26',
+'All meetings must be scheduled through his assistant.'),
+(4,
+'Eve',
+'C',
+'Sampson',
+'esampson@concor.com',
+NULL,
+'1972-05-11',
+'Very helpful.'),
+(5,
+'Carson',
+'B',
+'Campbell',
+'cbc232@mvch.orf',
+NULL,
+'1955-01-05',
+'Wife: Lisa Kids: Lucas, Lucy and Lucinda.');

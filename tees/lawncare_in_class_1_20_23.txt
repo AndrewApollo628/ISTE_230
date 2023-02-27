@@ -1,0 +1,38 @@
+mysql> show databases
+    -> ^C
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| lawncare           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_lawncare |
++--------------------+
+| customer           |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer;
++------------+-----------------+--------------------+------+-----------+------+
+| customerID | name            | address            | size | day       | cost |
++------------+-----------------+--------------------+------+-----------+------+
+|          1 | Barb Kraft      | 3246 Arlington     | 3200 | Friday    |    0 |
+|          2 | Dawn Wilcox     | 32 North Rd.       | 2000 | Monday    |    0 |
+|          3 | Jim Habermas    | 31 Captiva         | 1200 | Friday    |    0 |
+|          4 | Nancy Little    | 162 Mapleshade Rd. | 2323 | Monday    |    0 |
+|          5 | Norman Malnak   | 16 Manor Dr.       | 2500 | Saturday  |    0 |
+|          6 | Rita Miller     | 123 Main St.       | 2000 | Friday    |    0 |
+|          7 | Rocco Capeletti | 2 Computer Dr.     | 1222 | Thursday  |    0 |
+|          8 | Steve Rohrman   | 13 E. Cedar St.    | 1453 | Wednesday |    0 |
++------------+-----------------+--------------------+------+-----------+------+
+8 rows in set (0.00 sec)
+
+mysql> notee
