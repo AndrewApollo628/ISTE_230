@@ -1,0 +1,78 @@
+-- Andrew Apollo
+-- ISTE 230 
+-- PE06 Problem 1 
+
+mysql> SOURCE C:\Users\Andrew Apollo\ISTE230\ISTE_230\PE\PE06\Apollo_PE06.sql
+--------------
+DROP DATABASE IF EXISTS PE06
+--------------
+
+Query OK, 5 rows affected (0.01 sec)
+
+--------------
+CREATE DATABASE PE06
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+--------------
+CREATE TABLE Customer (
+    CustID VARCHAR(5) PRIMARY Key,
+    CustName VARCHAR(20),
+    CustContact VARCHAR(7)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+CREATE TABLE Product(
+    ProdID VARCHAR(5) PRIMARY KEY,
+    ProdDecription VARCHAR(60),
+    UnitPrice DECIMAL (5,2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+CREATE TABLE PO_Detail(
+    PO VARCHAR(10) PRIMARY KEY,
+    CustID VARCHAR(5),
+    ProductID VARCHAR(5),
+    Quanity SMALLINT,
+    CONSTRAINT Cutstomer_fk FOREIGN KEY (CustID)
+     REFERENCES Customer (CustID),
+    CONSTRAINT Product_fk FOREIGN KEY (ProductID)
+        REFERENCES Product(ProdID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+CREATE TABLE PO (
+    PO VARCHAR(10) PRIMARY KEY,
+    OrderDate DATE,
+    BillToAdress VARCHAR(60),
+    ShipToAdress VARCHAR(60),
+    CONSTRAINT PO_fk FOREIGN KEY (PO) 
+        REFERENCES PO_Detail(PO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+--------------
+CREATE TABLE Paid_PO(
+    PO VARCHAR(10) PRIMARY Key,
+    Amount DECIMAL(6,2),
+    CONSTRAINT Paid_Off_fk FOREIGN KEY (PO) 
+        REFERENCES PO_Detail(PO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+--------------
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> notee

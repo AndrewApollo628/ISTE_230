@@ -20,7 +20,7 @@ CREATE TABLE student(
     advisorID CHAR(9),
     departmentID VARCHAR(4),
     graduated BOOLEAN DEFAULT 0
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --Altering the student table
 ALTER TABLE student ADD CONSTRAINT student_department_fk FOREIGN KEY (departmentID)

@@ -1,0 +1,48 @@
+-- Andrew Apollo
+-- ISTE 230 Section 2 
+
+
+-- Problem 1
+DROP DATABASE IF EXISTS PE06; 
+
+CREATE DATABASE PE06;
+USE PE06;
+
+CREATE TABLE Customer (
+    CustID VARCHAR(5) PRIMARY Key,
+    CustName VARCHAR(20),
+    CustContact VARCHAR(7)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Product(
+    ProdID VARCHAR(5) PRIMARY KEY,
+    ProdDecription VARCHAR(60),
+    UnitPrice DECIMAL (5,2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE PO_Detail(
+    PO VARCHAR(10) PRIMARY KEY,
+    CustID VARCHAR(5),
+    ProductID VARCHAR(5),
+    Quanity SMALLINT,
+    CONSTRAINT Cutstomer_fk FOREIGN KEY (CustID)
+     REFERENCES Customer (CustID),
+    CONSTRAINT Product_fk FOREIGN KEY (ProductID)
+        REFERENCES Product(ProdID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE PO (
+    PO VARCHAR(10) PRIMARY KEY,
+    OrderDate DATE,
+    BillToAdress VARCHAR(60),
+    ShipToAdress VARCHAR(60),
+    CONSTRAINT PO_fk FOREIGN KEY (PO) 
+        REFERENCES PO_Detail(PO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE Paid_PO(
+    PO VARCHAR(10) PRIMARY Key,
+    Amount DECIMAL(6,2),
+    CONSTRAINT Paid_Off_fk FOREIGN KEY (PO) 
+        REFERENCES PO_Detail(PO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
