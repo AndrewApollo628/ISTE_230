@@ -1,0 +1,213 @@
+mysql> -- Question #1 Goal: statement will show the title for each book and its category description (sports, romance, etc). Sort the results first by category description in descending order, followed by title in ascending order.
+
+mysql> SELECT book.title, category.CatDescription FROM Book 
+    ->     JOIN category WHERE book.category = category.catID 
+    ->         ORDER BY category.CatDescription DESC;
+--------------
+SELECT book.title, category.CatDescription FROM Book 
+    JOIN category WHERE book.category = category.catID 
+        ORDER BY category.CatDescription DESC
+--------------
+
++--------------------------------------------------+-----------------+
+| title                                            | CatDescription  |
++--------------------------------------------------+-----------------+
+| Yes! Networking is for Bills Fans                | Sports          |
+| The Shortest Book in the World                   | Sports          |
+| Calculus for Phys Ed Majors                      | Science         |
+| Women are From Venus ORACLE is from Beyond Pluto | Romance         |
+| My Love's Last Longing                           | Romance         |
+| My Love's Last Lingering Lost                    | Romance         |
+| I Lasted my Love's Last Lingering Longing        | Romance         |
+| My Lost Love's Long Last Lingering               | Romance         |
+| My Love's at Long Last Lost his Lingering        | Romance         |
+| How to add Class to your Programming             | Programming     |
+| A language without Pointers? Priceless.          | Programming     |
+| JAVA: It's more than Just a Programming Language | Programming     |
+| How to Keep your Cellular Bill Down              | Networking      |
+| Tired of wired? Infrared instead!                | Networking      |
+| How to Keep your Cable Bill Down                 | Networking      |
+| The Science of Literature Searching              | Library Science |
+| From the Shores of Lake Erie to IT               | Geography       |
+| From Deep in the Heart of Texas to IT            | Geography       |
+| From Brockport to IT                             | Geography       |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR  | Database        |
+| Master Wireless Through The Classic Comics       | Comics          |
+| Master HTML Through The Classic Comics           | Comics          |
+| Master C++ Through The Classic Comics            | Comics          |
++--------------------------------------------------+-----------------+
+23 rows in set (0.00 sec)
+
+mysql> -- Question #2 Goal: List the book titles and their ratings for all reviewers who do not work for a newspaper or any other news organization
+
+mysql> SELECT Reviewer.name, book.title, BookReview.rating FROM book
+    ->     JOIN bookreview USING(ISBN)
+    ->         JOIN reviewer USING(reviewerid)
+    ->         WHERE reviewer.EmployedBy IS NULL;
+--------------
+SELECT Reviewer.name, book.title, BookReview.rating FROM book
+    JOIN bookreview USING(ISBN)
+        JOIN reviewer USING(reviewerid)
+        WHERE reviewer.EmployedBy IS NULL
+--------------
+
++-------+---------------------------------------+--------+
+| name  | title                                 | rating |
++-------+---------------------------------------+--------+
+| Leone | How to Keep your Cellular Bill Down   |      7 |
+| Leone | How to Keep your Cable Bill Down      |      7 |
+| Leone | From Deep in the Heart of Texas to IT |      6 |
++-------+---------------------------------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> -- Question #3 Goal:  show the title and the lastname and firstname for the author(s) of the book
+
+mysql> SELECT book.title, author.lastname, author.firstname FROM Book
+    ->     JOIN bookauthor USING(ISBN) 
+    ->         JOIN author USING(authorID)
+    ->         ORDER BY title, lastname DESC; 
+--------------
+SELECT book.title, author.lastname, author.firstname FROM Book
+    JOIN bookauthor USING(ISBN) 
+        JOIN author USING(authorID)
+        ORDER BY title, lastname DESC
+--------------
+
++--------------------------------------------------+------------+-----------+
+| title                                            | lastname   | firstname |
++--------------------------------------------------+------------+-----------+
+| A language without Pointers? Priceless.          | Bierre     | Kevin     |
+| A language without Pointers? Priceless.          | Axelrod    | Mike      |
+| Calculus for Phys Ed Majors                      | Troell     | Luther    |
+| Calculus for Phys Ed Majors                      | Hartpence  | Bruce     |
+| Calculus for Phys Ed Majors                      | Garrison   | Dan       |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR  | Stratton   | Bill      |
+| From Brockport to IT                             | Johnson    | Daryl     |
+| From Deep in the Heart of Texas to IT            | Troell     | Luther    |
+| From the Shores of Lake Erie to IT               | Stratton   | Bill      |
+| How to add Class to your Programming             | Niemi      | Rayno     |
+| How to add Class to your Programming             | Kang       | Jai       |
+| How to Keep your Cable Bill Down                 | Hartpence  | Bruce     |
+| How to Keep your Cellular Bill Down              | Hartpence  | Bruce     |
+| I Lasted my Love's Last Lingering Longing        | Heartthrob | Danielle  |
+| JAVA: It's more than Just a Programming Language | Sonstein   | Jeff      |
+| Master C++ Through The Classic Comics            | Webguy     | Smerdley  |
+| Master C++ Through The Classic Comics            | Machogeek  | Hero      |
+| Master HTML Through The Classic Comics           | Webguy     | Smerdley  |
+| Master HTML Through The Classic Comics           | Machogeek  | Hero      |
+| Master Wireless Through The Classic Comics       | Hartpence  | Bruce     |
+| My Lost Love's Long Last Lingering               | Heartthrob | Danielle  |
+| My Love's at Long Last Lost his Lingering        | Heartthrob | Danielle  |
+| My Love's Last Lingering Lost                    | Heartthrob | Danielle  |
+| My Love's Last Longing                           | Heartthrob | Danielle  |
+| The Science of Literature Searching              | Lawley     | Elizabeth |
+| The Science of Literature Searching              | Henderson  | Tona      |
+| The Shortest Book in the World                   | Phelps     | Andrew    |
+| Tired of wired? Infrared instead!                | Hartpence  | Bruce     |
+| Women are From Venus ORACLE is from Beyond Pluto | Weeden     | Elissa    |
+| Yes! Networking is for Bills Fans                | Phelps     | Andrew    |
+| Yes! Networking is for Bills Fans                | Lutz       | Peter     |
+| Yes! Networking is for Bills Fans                | Leone      | James     |
++--------------------------------------------------+------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> -- Question #4 Goal: lists  titles, author?s names, and prices for pre-owned books that are priced at $50.00 or below
+
+mysql> SELECT book.title, author.firstname, author.lastname, ownersbook.price FROM book
+    ->     JOIN bookauthor USING(ISBN) 
+    ->         JOIN author USING(authorID)
+    ->             JOIN ownersbook USING(ISBN)
+    ->                 JOIN bookcondition USING(ranking)
+    ->                 WHERE price<='50.00'
+    ->                     ORDER BY price DESC;
+--------------
+SELECT book.title, author.firstname, author.lastname, ownersbook.price FROM book
+    JOIN bookauthor USING(ISBN) 
+        JOIN author USING(authorID)
+            JOIN ownersbook USING(ISBN)
+                JOIN bookcondition USING(ranking)
+                WHERE price<='50.00'
+                    ORDER BY price DESC
+--------------
+
++-------------------------------------------------+-----------+------------+-------+
+| title                                           | firstname | lastname   | price |
++-------------------------------------------------+-----------+------------+-------+
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR | Bill      | Stratton   | 50.00 |
+| My Love's Last Longing                          | Danielle  | Heartthrob | 50.00 |
+| How to Keep your Cable Bill Down                | Bruce     | Hartpence  | 45.00 |
+| Yes! Networking is for Bills Fans               | Peter     | Lutz       | 40.00 |
+| Yes! Networking is for Bills Fans               | James     | Leone      | 40.00 |
+| Yes! Networking is for Bills Fans               | Andrew    | Phelps     | 40.00 |
+| The Shortest Book in the World                  | Andrew    | Phelps     | 35.00 |
+| How to Keep your Cellular Bill Down             | Bruce     | Hartpence  | 25.00 |
+| My Lost Love's Long Last Lingering              | Danielle  | Heartthrob | 25.00 |
+| From the Shores of Lake Erie to IT              | Bill      | Stratton   |  0.00 |
++-------------------------------------------------+-----------+------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> -- Question #5 Goal: Show the titles of ALL books and if the book had a reviewer show the name of the reviewer(s)
+
+mysql> SELECT book.title, reviewer.name FROM reviewer
+    ->     JOIN bookreview USING(reviewerid) 
+    ->         RIGHT JOIN book USING(ISBN);
+--------------
+SELECT book.title, reviewer.name FROM reviewer
+    JOIN bookreview USING(reviewerid) 
+        RIGHT JOIN book USING(ISBN)
+--------------
+
++--------------------------------------------------+-------------+
+| title                                            | name        |
++--------------------------------------------------+-------------+
+| Women are From Venus ORACLE is from Beyond Pluto | Phelps      |
+| Calculus for Phys Ed Majors                      | NULL        |
+| My Love's Last Longing                           | Heartthrob  |
+| From the Shores of Lake Erie to IT               | Yacci       |
+| My Love's Last Lingering Lost                    | Troell      |
+| My Love's Last Lingering Lost                    | Phelps      |
+| The Science of Literature Searching              | NULL        |
+| Yes! Networking is for Bills Fans                | Kurtz       |
+| Yes! Networking is for Bills Fans                | Whittington |
+| Yes! Networking is for Bills Fans                | Stratton    |
+| How to Keep your Cellular Bill Down              | Leone       |
+| How to Keep your Cellular Bill Down              | Whittington |
+| Tired of wired? Infrared instead!                | NULL        |
+| ER, SOM, NF, DK/NF, SQL, JDBC, ODBC, and RELVAR  | Bills       |
+| Master Wireless Through The Classic Comics       | NULL        |
+| How to Keep your Cable Bill Down                 | Leone       |
+| I Lasted my Love's Last Lingering Longing        | Weeden      |
+| From Deep in the Heart of Texas to IT            | Leone       |
+| My Lost Love's Long Last Lingering               | Stratton    |
+| From Brockport to IT                             | Yacci       |
+| From Brockport to IT                             | Perez-Hardy |
+| Master HTML Through The Classic Comics           | NULL        |
+| The Shortest Book in the World                   | Kurtz       |
+| The Shortest Book in the World                   | Stratton    |
+| My Love's at Long Last Lost his Lingering        | Weeden      |
+| How to add Class to your Programming             | McVea       |
+| Master C++ Through The Classic Comics            | NULL        |
+| A language without Pointers? Priceless.          | NULL        |
+| JAVA: It's more than Just a Programming Language | Whittington |
++--------------------------------------------------+-------------+
+29 rows in set (0.00 sec)
+
+mysql> -- Question #6 Goal: display the ISBN and title of book that have a category that starts with the letter ?S?
+
+mysql> SELECT book.ISBN, book.title FROM BOOK 
+    ->     WHERE category in (SELECT catID FROM category WHERE CatDescription LIKE 'S%');
+--------------
+SELECT book.ISBN, book.title FROM BOOK 
+    WHERE category in (SELECT catID FROM category WHERE CatDescription LIKE 'S%')
+--------------
+
++---------------+-----------------------------------+
+| ISBN          | title                             |
++---------------+-----------------------------------+
+| 1-222-32443-7 | Calculus for Phys Ed Majors       |
+| 2-089-77869-5 | Yes! Networking is for Bills Fans |
+| 8-330-69586-6 | The Shortest Book in the World    |
++---------------+-----------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> notee

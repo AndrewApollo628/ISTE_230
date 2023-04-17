@@ -1,0 +1,122 @@
+mysql> notee
+mysql> -- Selected all data from the strong entity
+mysql> SELECT * FROM Team;
+--------------
+SELECT * FROM Team
+--------------
+
++-----------------------+---------------+---------------+---------------------------------+--------+---------+--------------+---------+
+| Name                  | City          | State         | Stadium                         | League | Divison | Abbreviation | Team_id |
++-----------------------+---------------+---------------+---------------------------------+--------+---------+--------------+---------+
+| New York Mets         | New York      | New York      | Citi Field                      | NL     | East    | NYM          |       0 |
+| New York Yankees      | New York      | New York      | Yankee Stadium                  | AL     | East    | NYY          |       1 |
+| Boston Red Sox        | Boston        | Massachusetts | Fenway Park                     | AL     | East    | BOS          |       2 |
+| Tampa Bay Rays        | Tampa         | Florida       | Tropicana Field                 | AL     | East    | TB           |       3 |
+| Baltimore Orioles     | Baltimore     | Maryland      | Camden Yards                    | AL     | East    | BAL          |       4 |
+| Toranto Blue Jays     | Toranto       | Canada        | Rogers Centre                   | AL     | East    | TOR          |       5 |
+| Minnesota Twins       | Minneapolis   | Minnesota     | Target Field                    | AL     | Central | MIN          |       6 |
+| Cleveland Guardians   | Cleveland     | Ohio          | Progressive Field               | AL     | Central | CLE          |       7 |
+| Chicago White Sox     | Chicago       | Illinois      | Guaranteed Rate Feild           | AL     | Central | CWS          |       8 |
+| Detriot Tigers        | Detriot       | Michigan      | Comerica Park                   | AL     | Central | DET          |       9 |
+| Kansas City Royals    | Kansas City   | Missouri      | Kauffman Stadium                | AL     | Central | KC           |      10 |
+| Texas Rangers         | Arlington     | Texas         | Globe Life Field                | AL     | West    | TEX          |      11 |
+| Seattle Mariners      | Seattle       | Washington    | T-Mobile Park                   | AL     | West    | SEA          |      12 |
+| Los Angeles Angels    | Los Angeles   | California    | Angel Stadium of Anaheim        | AL     | West    | LAA          |      13 |
+| Houston Astros        | Houston       | Texas         | Minute Maid Park                | AL     | West    | HOU          |      14 |
+| Oakland Athletics     | Oakland       | California    | Oakland-Alameda County Coliseum | AL     | West    | OAK          |      15 |
+| Atlanta Braves        | Atlanta       | Georgia       | Truist Park                     | NL     | East    | ATL          |      16 |
+| Miami Marlins         | Miami         | Florida       | LoanDepot Park                  | NL     | East    | MIA          |      17 |
+| Washington Nationals  | Washington    | D.C.          | Nationals Park                  | NL     | East    | WAS          |      18 |
+| Philadelphia Phillies | Philadelphia  | Pennsylvania  | Citizens Bank Park              | NL     | East    | PHI          |      19 |
+| Milwaukee Brewers     | Milwaukee     | Wisconsin     | American Family Feild           | NL     | Central | MIL          |      20 |
+| Chicago Cubs          | Chicago       | Illinois      | Wrigley Field                   | NL     | Central | CHC          |      21 |
+| Pittsburg Pirates     | Pittsburg     | Pennsylvania  | PNC Park                        | NL     | Central | PIT          |      22 |
+| St. Louis Cardinals   | St. Louis     | Missouri      | Bush Stadium                    | NL     | Central | STL          |      23 |
+| Cincinnati Reds       | Cincinnati    | Ohio          | Great American Ball Park        | NL     | Central | CIN          |      24 |
+| Arizona Dimoundbacks  | Phoenix       | Arizona       | Chase Field                     | NL     | West    | ARI          |      25 |
+| Los Angeles Dodgers   | Los Angeles   | California    | Dodger Stadium                  | NL     | West    | LAD          |      26 |
+| San Diego Padres      | San Diego     | California    | Petco Park                      | NL     | West    | SD           |      27 |
+| San Francisco Giants  | San Francisco | California    | Oracle Park                     | NL     | West    | SF           |      28 |
+| Colorado Rockies      | Denver        | Colorado      | Coors Field                     | NL     | West    | COL          |      29 |
++-----------------------+---------------+---------------+---------------------------------+--------+---------+--------------+---------+
+30 rows in set (0.00 sec)
+
+mysql> -- Selected all data from the weak entity 
+mysql> SELECT * FROM Player;
+--------------
+SELECT * FROM Player
+--------------
+
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+| Team_id | FirstName | LastName  | age  | JerseyNum | Salary   | Position | Bats | Throws |
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+|       0 | Fransisco | Lindor    |   29 |        12 | 34100000 | SS       | S    | R      |
+|       1 | Gerrit    | Cole      |   32 |        45 | 36000000 | SP       | R    | R      |
+|       1 | Anthony   | Rizzo     |   33 |        48 | 20000000 | 1B       | L    | L      |
+|       2 | Trevor    | Story     |   30 |        10 | 20000000 | SS       | R    | R      |
+|       4 | Adley     | Rutschman |   25 |        35 |   733900 | C        | S    | R      |
+|       6 | Jorge     | Polanco   |   29 |        11 | 51500000 | 2B/SS    | S    | R      |
+|      13 | Mike      | Trout     |   31 |        27 | 35450000 | CF       | R    | R      |
+|      14 | Alex      | Bregman   |   29 |         2 | 20000000 | 3B       | R    | R      |
+|      16 | Willson   | Contreras |   30 |        40 | 10000000 | C        | R    | R      |
+|      17 | Sixto     | Sanchez   |   24 |        73 |   700000 | SP       | S    | R      |
+|      19 | Bryce     | Harper    |   30 |         3 | 26000000 | RF       | L    | R      |
+|      19 | Trea      | Turner    |   29 |         8 | 27272727 | SS       | R    | R      |
+|      19 | Nolan     | Arenado   |   32 |        28 | 32500000 | 3B       | R    | R      |
+|      20 | Christian | Yelich    |   31 |        22 | 22000000 | LF       | L    | R      |
+|      22 | David     | Bednar    |   28 |        51 |  7450000 | RP       | R    | R      |
+|      24 | Joey      | Votto     |   39 |        19 | 25000000 | 1B       | L    | R      |
+|      26 | Clayton   | Kershaw   |   35 |        22 | 31000000 | SP       | L    | L      |
+|      26 | Mookie    | Betts     |   30 |        50 | 20000000 | RF       | R    | R      |
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+18 rows in set (0.00 sec)
+
+mysql> -- Selected all data from the weak entity 
+mysql> SELECT * FROM Player;
+--------------
+SELECT * FROM Player
+--------------
+
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+| Team_id | FirstName | LastName  | age  | JerseyNum | Salary   | Position | Bats | Throws |
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+|       0 | Fransisco | Lindor    |   29 |        12 | 34100000 | SS       | S    | R      |
+|       1 | Gerrit    | Cole      |   32 |        45 | 36000000 | SP       | R    | R      |
+|       1 | Anthony   | Rizzo     |   33 |        48 | 20000000 | 1B       | L    | L      |
+|       2 | Trevor    | Story     |   30 |        10 | 20000000 | SS       | R    | R      |
+|       4 | Adley     | Rutschman |   25 |        35 |   733900 | C        | S    | R      |
+|       6 | Jorge     | Polanco   |   29 |        11 | 51500000 | 2B/SS    | S    | R      |
+|      13 | Mike      | Trout     |   31 |        27 | 35450000 | CF       | R    | R      |
+|      14 | Alex      | Bregman   |   29 |         2 | 20000000 | 3B       | R    | R      |
+|      16 | Willson   | Contreras |   30 |        40 | 10000000 | C        | R    | R      |
+|      17 | Sixto     | Sanchez   |   24 |        73 |   700000 | SP       | S    | R      |
+|      19 | Bryce     | Harper    |   30 |         3 | 26000000 | RF       | L    | R      |
+|      19 | Trea      | Turner    |   29 |         8 | 27272727 | SS       | R    | R      |
+|      19 | Nolan     | Arenado   |   32 |        28 | 32500000 | 3B       | R    | R      |
+|      20 | Christian | Yelich    |   31 |        22 | 22000000 | LF       | L    | R      |
+|      22 | David     | Bednar    |   28 |        51 |  7450000 | RP       | R    | R      |
+|      24 | Joey      | Votto     |   39 |        19 | 25000000 | 1B       | L    | R      |
+|      26 | Clayton   | Kershaw   |   35 |        22 | 31000000 | SP       | L    | L      |
+|      26 | Mookie    | Betts     |   30 |        50 | 20000000 | RF       | R    | R      |
++---------+-----------+-----------+------+-----------+----------+----------+------+--------+
+18 rows in set (0.00 sec)
+
+mysql> -- Scenerio: Team travel managers wants to know what city's the upcoming road trip will be in 
+mysql> --           The team will be facing the Rangers and the Twins. They need the city and stadium name so they can 
+mysql> --           find close aiprot and hotels for the teams players.
+mysql> SELECT name as "Team Name", CONCAT(city, ",", State) as "Location", Stadium FROM team
+    ->     WHERE name like '%Rangers' or name like '%Twins'; 
+--------------
+SELECT name as "Team Name", CONCAT(city, ",", State) as "Location", Stadium FROM team
+    WHERE name like '%Rangers' or name like '%Twins'
+--------------
+
++-----------------+-----------------------+------------------+
+| Team Name       | Location              | Stadium          |
++-----------------+-----------------------+------------------+
+| Minnesota Twins | Minneapolis,Minnesota | Target Field     |
+| Texas Rangers   | Arlington,Texas       | Globe Life Field |
++-----------------+-----------------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> notee

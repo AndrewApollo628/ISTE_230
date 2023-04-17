@@ -1,0 +1,112 @@
+mysql> -- Question #1 - Goal: Show recipies that source is Mom 
+mysql> SELECT name FROM recipe WHERE source = 'mom';
+--------------
+SELECT name FROM recipe WHERE source = 'mom'
+--------------
+
++--------------------+
+| name               |
++--------------------+
+| Linguine Pescadoro |
+| Zuppa Inglese      |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> -- Question #2 - Goal: find recipe names that have fewer than 800 calories per serving
+mysql> SELECT recipe.name FROM recipe 
+    ->     JOIN nutrition USING(recipeid)
+    ->     WHERE nutrition.name = 'calories' AND 
+    ->     quantity < 800;
+--------------
+SELECT recipe.name FROM recipe 
+    JOIN nutrition USING(recipeid)
+    WHERE nutrition.name = 'calories' AND 
+    quantity < 800
+--------------
+
++----------------------+
+| name                 |
++----------------------+
+| Linguine Pescadoro   |
+| Zuppa Inglese        |
+| Crispy Fried Chicken |
++----------------------+
+3 rows in set (0.00 sec)
+
+mysql> -- Question #3 - Goal: Create a shopping list of ingrediants and their quantity for the Beef Parmesan Recipe 
+mysql> SELECT ingredients.name, ingredientlist.quantity FROM recipe
+    ->     JOIN ingredientlist USING(recipeid)
+    ->         JOIN ingredients USING(ingredientid)
+    ->             WHERE recipe.name like 'Beef Parm%';
+--------------
+SELECT ingredients.name, ingredientlist.quantity FROM recipe
+    JOIN ingredientlist USING(recipeid)
+        JOIN ingredients USING(ingredientid)
+            WHERE recipe.name like 'Beef Parm%'
+--------------
+
++------------------------------------+----------+
+| name                               | quantity |
++------------------------------------+----------+
+| beef cube steak                    |      1.5 |
+| onion, sliced into thin rings      |        1 |
+| green bell pepper, sliced in rings |        1 |
+| Italian seasoned bread crumbs      |        1 |
+| grated Parmesan cheese             |      0.5 |
+| olive oil                          |    0.125 |
+| spaghetti sauce                    |        1 |
+| shredded mozzarella cheese         |      0.5 |
+| angel hair pasta                   |        1 |
+| garlic                             |        1 |
+| butter                             |    0.125 |
++------------------------------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> 
+mysql> -- Question #4 - Goal: Find recipes that do not use beef,pork, chicken, or lamb
+mysql> SELECT distinct recipe.name FROM recipe 
+    ->     WHERE recipeid NOT IN 
+    ->     (SELECT ingredientlist.recipeid FROM ingredientlist
+    ->         JOIN ingredients USING(ingredientid)
+    ->             WHERE ingredients.type IN ('beef', 'chicken', 'pork', 'lamb'));
+--------------
+SELECT distinct recipe.name FROM recipe 
+    WHERE recipeid NOT IN 
+    (SELECT ingredientlist.recipeid FROM ingredientlist
+        JOIN ingredients USING(ingredientid)
+            WHERE ingredients.type IN ('beef', 'chicken', 'pork', 'lamb'))
+--------------
+
++--------------------+
+| name               |
++--------------------+
+| Linguine Pescadoro |
+| Zuppa Inglese      |
+| Lobster Thermadore |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> -- Question #5 - Goal: Find the names of fish recipes that have fewer than 700 calories per serving
+mysql> SELECT DISTINCT recipe.name FROM recipe
+    ->     JOIN nutrition USING(recipeid)
+    ->         JOIN ingredientlist USING(recipeid)
+    ->             JOIN ingredients USING(ingredientid)
+    ->                 WHERE nutrition.name = 'calories' AND nutrition.quantity < 700
+    ->                     AND ingredients.type = 'fish';
+--------------
+SELECT DISTINCT recipe.name FROM recipe
+    JOIN nutrition USING(recipeid)
+        JOIN ingredientlist USING(recipeid)
+            JOIN ingredients USING(ingredientid)
+                WHERE nutrition.name = 'calories' AND nutrition.quantity < 700
+                    AND ingredients.type = 'fish'
+--------------
+
++--------------------+
+| name               |
++--------------------+
+| Linguine Pescadoro |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> notee
