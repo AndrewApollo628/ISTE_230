@@ -1,3 +1,8 @@
+-- Andrew Apollo
+-- ISTE 230
+-- Prof French
+-- 4/24/2023
+
 USE my_guitar_shop;
 
 -- Question #1 
